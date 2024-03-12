@@ -701,7 +701,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
     private void clickClient(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickClient
         // TODO add your handling code here:
-        
+        // AFFICHAGE CLIENTS
         int row = jTableClients.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
         
         if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
