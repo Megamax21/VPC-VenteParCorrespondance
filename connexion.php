@@ -3,7 +3,9 @@
         <title>Le Super Coin</title>
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <link href="VPC_css.css" rel="stylesheet">
+        <link href="./css/nav_bar.css" rel="stylesheet">
+        <link href="./css/connection.css" rel="stylesheet">
+
     </head>
     <body>
         <div id="header">
@@ -77,6 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && 
         $utilisateur = $resultat->fetch_assoc();
        // if (password_verify($mot_de_passe_connexion, $utilisateur['mdp'])) {
         if ($mot_de_passe_connexion== $utilisateur['mdp']) {
+
+            $_SESSION['Id_Client'] = $utilisateur['Id_Client'];
+            $_SESSION['nom_utilisateur'] = $utilisateur['nom'];
+            $_SESSION['prenom_utilisateur'] = $utilisateur['prenom'];
+            $_SESSION['adresse_utilisateur'] = $utilisateur['adresse'];
+            $_SESSION['numero_utilisateur'] = $utilisateur['numero'];
+            $_SESSION['mail_utilisateur'] = $utilisateur['mail'];
+            $_SESSION['mdp_utilisateur'] = $utilisateur['mdp'];
+            
             header('Location: Index.php');
             exit();
         } else {

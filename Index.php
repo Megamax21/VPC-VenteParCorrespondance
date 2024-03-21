@@ -4,7 +4,9 @@
         <title>Le Super Coin</title>
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <link href="VPC_css.css" rel="stylesheet">
+        <link href="./css/nav_bar.css" rel="stylesheet">
+        <link href="./css/index.css" rel="stylesheet">
+
     </head>
     <body>
         <div id="header">
