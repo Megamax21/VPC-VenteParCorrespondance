@@ -55,10 +55,9 @@ $mot_de_passe_bdd = "123456";
 $nom_bdd = "vpc";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && isset($_POST['mot_de_passe_connexion'])) {
-    // Récupération de l'email + mdp
+
     $email_connexion = $_POST['email_connexion'];
     $mot_de_passe_connexion = $_POST['mot_de_passe_connexion'];
-
 
     $connexion = new mysqli($serveur, $utilisateur, $mot_de_passe_bdd, $nom_bdd);
 
@@ -66,24 +65,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && 
         die("Échec de la connexion à la base de données : " . $connexion->connect_error);
     }
 
-    $requete = $connexion->prepare("SELECT * FROM t_clients WHERE mail = '$email_connexion'");
-    //$requete->bind_param("s", $email_connexion);
+    $requete = $connexion->prepare("SELECT * FROM t_clients WHERE mail = ?");
+    $requete->bind_param("s", $email_connexion);
     $requete->execute();
 
     $resultat = $requete->get_result();
 
     if ($resultat->num_rows == 1) {
-        echo '<p> Variables : '.$mot_de_passe_connexion.'</p>';
-
-        $utilisateur_co = $resultat->fetch_assoc();
-        if (password_verify($mot_de_passe_connexion, $resultat['MDP'])) {
+        $utilisateur = $resultat->fetch_assoc();
+        if (password_verify($mot_de_passe_connexion, $utilisateur['mot_de_passe'])) {
             header('Location: Index.php');
             exit();
         } else {
             echo "Mot de passe incorrect.";
         }
     } else {
-        echo "Aucun compte trouvé avec cet e-mail."; 
+        echo "Aucun compte trouvé avec cet e-mail.";
     }
 
     $requete->close();
