@@ -17,7 +17,7 @@
                 </form>
                 <ul>
                 <li>
-                    <a href="Index.php">Acceuil</a>
+                    <a href="Index.php">Accueil</a>
                 </li>
                 <li class="dropdown">
                     <a href="">Boutique</a>

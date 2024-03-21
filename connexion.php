@@ -16,7 +16,7 @@
                 </form>
                 <ul>
                 <li>
-                    <a href="Index.php">Acceuil</a>
+                    <a href="Index.php">Accueil</a>
                 </li>
                 <li class="dropdown">
                     <a href="">Boutique</a>
@@ -48,6 +48,7 @@
 
 <?php
 //   ------------------------------------------------------------------------------CONNEXION--------------------------------------------------------------------------------------
+session_start();
 
 $serveur = "localhost";
 $utilisateur = "VPC";
@@ -71,9 +72,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && 
 
     $resultat = $requete->get_result();
 
+
     if ($resultat->num_rows == 1) {
         $utilisateur = $resultat->fetch_assoc();
-        if (password_verify($mot_de_passe_connexion, $utilisateur['mot_de_passe'])) {
+       // if (password_verify($mot_de_passe_connexion, $utilisateur['mdp'])) {
+        if ($mot_de_passe_connexion== $utilisateur['mdp']) {
             header('Location: Index.php');
             exit();
         } else {
