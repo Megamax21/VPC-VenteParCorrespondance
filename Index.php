@@ -17,7 +17,7 @@
                 </form>
                 <ul>
                 <li>
-                    <a href="">Acceuil</a>
+                    <a href="Index.php">Acceuil</a>
                 </li>
                 <li class="dropdown">
                     <a href="">Boutique</a>
@@ -37,8 +37,8 @@
                         <li><a href="#">Se déconnecter</a></li>
                     </ul>        
                 </li>
-                <button class="btn_connection">
-                    Connection / Inscription
+                <button class="btn_connection" onclick="window.location.href='connexion.php'">
+                    Connexion / Inscription
                 </button>
                 </ul>
             </nav>
