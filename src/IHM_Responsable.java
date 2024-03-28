@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -24,22 +25,24 @@ public final class IHM_Responsable extends javax.swing.JFrame {
      */
     public Connection connection = null;
     public int ID_Select_Client = 0;
+    public int ID_Select_Article= 0;
+    public int ID_Select_Commande=0;
     
     public IHM_Responsable() {
         initComponents();
         jTabbedPaneFenetre.setVisible(false);
         
-        /* A décommenter si je suis au lycée ! ! !*/
+        /* A décommenter si je suis au lycée ! ! !
         String url = "jdbc:mysql://10.194.196.225:3306/vpc";
         String user = "VPC";
         String password = "123456";
-        
-        /* A décommenter si je suis hors des cours ! ! ! 
+        */
+        /* A décommenter si je suis hors des cours ! ! ! */
         String url = "jdbc:mysql://localhost/vpc";
         String user = "root";
         String password = "";
         System.out.println("COMMENCEMENT");
-        */
+        
              
         try {
             this.connection = DriverManager.getConnection(url,user,password);
@@ -47,6 +50,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             
             // Tout ce qu'il y a à faire après la connexion à la BDD, au commencement
             this.RemplirListeClients();
+            this.RemplirListeArticles();
+            this.RemplirListeCommandes();
             
             
         } catch (SQLException ex) {
@@ -96,8 +101,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jTextFieldPrixArticle = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jTextFieldRefArticle = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabelGenreArticle = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableArticles = new javax.swing.JTable();
+        jButtonRafraichirArticles = new javax.swing.JButton();
         jPanelCommandes = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanelModifClient2 = new javax.swing.JPanel();
@@ -114,6 +122,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jLabelPrixCommande = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTableCommandes = new javax.swing.JTable();
+        jButtonRafraichirCommandes = new javax.swing.JButton();
         jPanelAlertes = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -191,7 +200,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                         .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldMailClient)
                             .addComponent(jTextFieldNumClient)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                             .addGroup(jPanelModifClientLayout.createSequentialGroup()
                                 .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldNomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -293,8 +302,20 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jPanelModifClient1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButtonModifierArticle.setText("Modifier");
+        jButtonModifierArticle.setEnabled(false);
+        jButtonModifierArticle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModifierArticleActionPerformed(evt);
+            }
+        });
 
         jButtonSupprimerArticle.setText("Supprimer");
+        jButtonSupprimerArticle.setEnabled(false);
+        jButtonSupprimerArticle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSupprimerArticleActionPerformed(evt);
+            }
+        });
 
         jLabel16.setText("Libellé :");
 
@@ -304,6 +325,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
         jLabel19.setText("Référence :");
 
+        jLabel6.setText("Genre :");
+
         javax.swing.GroupLayout jPanelModifClient1Layout = new javax.swing.GroupLayout(jPanelModifClient1);
         jPanelModifClient1.setLayout(jPanelModifClient1Layout);
         jPanelModifClient1Layout.setHorizontalGroup(
@@ -311,12 +334,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             .addGroup(jPanelModifClient1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldRefArticle)
                     .addGroup(jPanelModifClient1Layout.createSequentialGroup()
                         .addComponent(jButtonModifierArticle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonSupprimerArticle))
                     .addGroup(jPanelModifClient1Layout.createSequentialGroup()
-                        .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelModifClient1Layout.createSequentialGroup()
                                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldLibelleArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,9 +351,12 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                                     .addComponent(jTextFieldStockArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19)
-                            .addComponent(jTextFieldPrixArticle, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                            .addComponent(jTextFieldRefArticle))
-                        .addGap(0, 1, Short.MAX_VALUE)))
+                            .addGroup(jPanelModifClient1Layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelGenreArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTextFieldPrixArticle))
                 .addContainerGap())
         );
         jPanelModifClient1Layout.setVerticalGroup(
@@ -343,7 +370,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldLibelleArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldStockArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabelGenreArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldPrixArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,7 +382,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldRefArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonModifierArticle)
                     .addComponent(jButtonSupprimerArticle))
@@ -369,7 +400,22 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 "Libellé", "Stock"
             }
         ));
+        jTableArticles.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickArticle(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTableArticlesMousePressed(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTableArticles);
+
+        jButtonRafraichirArticles.setText("Rafraîchir");
+        jButtonRafraichirArticles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRafraichirArticlesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelArticlesLayout = new javax.swing.GroupLayout(jPanelArticles);
         jPanelArticles.setLayout(jPanelArticlesLayout);
@@ -380,21 +426,30 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addGroup(jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelModifClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelArticlesLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(jButtonRafraichirArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(113, Short.MAX_VALUE))
+                    .addGroup(jPanelArticlesLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanelModifClient1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanelArticlesLayout.setVerticalGroup(
             jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelArticlesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelArticlesLayout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanelModifClient1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelArticlesLayout.createSequentialGroup()
+                        .addComponent(jPanelModifClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRafraichirArticles)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPaneFenetre.addTab("Articles", jPanelArticles);
@@ -404,6 +459,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jPanelModifClient2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButtonRefuserCommande.setText("Refuser");
+        jButtonRefuserCommande.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefuserCommandeActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("Id Client :");
 
@@ -425,6 +485,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTableContenuCommande);
 
         jButtonValiderCommande.setText("Valider");
+        jButtonValiderCommande.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderCommandeActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Prix commande :");
 
@@ -457,7 +522,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelPrixCommande)))
-                        .addGap(0, 3, Short.MAX_VALUE)))
+                        .addGap(0, 12, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelModifClient2Layout.setVerticalGroup(
@@ -497,7 +562,19 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 "ID", "Date", "Client"
             }
         ));
+        jTableCommandes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                clickCommande(evt);
+            }
+        });
         jScrollPane6.setViewportView(jTableCommandes);
+
+        jButtonRafraichirCommandes.setText("Rafraîchir");
+        jButtonRafraichirCommandes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRafraichirCommandesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCommandesLayout = new javax.swing.GroupLayout(jPanelCommandes);
         jPanelCommandes.setLayout(jPanelCommandesLayout);
@@ -508,11 +585,15 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addGroup(jPanelCommandesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCommandesLayout.createSequentialGroup()
                         .addComponent(jLabel21)
-                        .addGap(0, 42, Short.MAX_VALUE))
+                        .addGap(0, 55, Short.MAX_VALUE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelModifClient2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelCommandesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonRafraichirCommandes, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(202, 202, 202))
         );
         jPanelCommandesLayout.setVerticalGroup(
             jPanelCommandesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -524,7 +605,9 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRafraichirCommandes)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jTabbedPaneFenetre.addTab("Commandes", jPanelCommandes);
@@ -556,7 +639,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addGroup(jPanelAlertesLayout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(jButtonRafraichirAlertes)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanelAlertesLayout.setVerticalGroup(
             jPanelAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -601,7 +684,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
                 .addGap(201, 201, 201)
@@ -681,13 +764,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPaneFenetre, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(10, Short.MAX_VALUE))
+            .addComponent(jTabbedPaneFenetre, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelConnexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 2, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -713,7 +794,19 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_clickClient
-
+    public void viderTextFieldsArticles(){
+        jTextFieldLibelleArticle.setText("");
+        jTextFieldPrixArticle.setText("");
+        jTextFieldStockArticle.setText("");
+        jTextFieldRefArticle.setText("");
+        
+        jButtonModifierArticle.setEnabled(false);
+        jButtonSupprimerArticle.setEnabled(false);
+        
+        this.ID_Select_Article = 0;
+        this.RemplirListeArticles();
+    }
+    
     public void viderTextFieldsClient() {
         jTextAreaAdresse.setText("");
         jTextFieldNomClient.setText("");
@@ -729,12 +822,26 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         this.RemplirListeClients();
     }
     
+    public void viderTextFieldsCommande(){
+        jTextFieldIdClient.setText("");
+        jTextFieldDateCommande.setText("");
+        jLabelPrixCommande.setText("0 €");
+        
+        DefaultTableModel tableauVideCommande = new DefaultTableModel();
+        String[] entete = {"Article","Nombre","Prix indv.","Prix total"};
+        tableauVideCommande.setColumnIdentifiers(entete);
+        
+        jTableContenuCommande.setModel(tableauVideCommande);
+        this.RemplirListeCommandes();
+        
+    }
+    
     private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
         // TODO add your handling code here:
         jPanelConnexion.setVisible(false);
         jTabbedPaneFenetre.setVisible(true);
     }//GEN-LAST:event_jButtonConnexionActionPerformed
-
+    
     private void ModificationClient(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificationClient
         try {
             // TODO add your handling code here:
@@ -778,6 +885,101 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         // TODO add your handling code here:
         viderTextFieldsClient();
     }//GEN-LAST:event_jButtonRafraichirClientsActionPerformed
+
+    private void jTableArticlesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableArticlesMousePressed
+        // TODO add your handling code here:
+        viderTextFieldsArticles();
+    }//GEN-LAST:event_jTableArticlesMousePressed
+
+    private void jButtonRafraichirArticlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRafraichirArticlesActionPerformed
+        // TODO add your handling code here:
+        viderTextFieldsArticles();
+    }//GEN-LAST:event_jButtonRafraichirArticlesActionPerformed
+
+    private void jButtonRafraichirCommandesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRafraichirCommandesActionPerformed
+        // TODO add your handling code here:
+        this.viderTextFieldsCommande();
+    }//GEN-LAST:event_jButtonRafraichirCommandesActionPerformed
+
+    private void clickArticle(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickArticle
+        // TODO add your handling code here:
+        // AFFICHAGE ARTICLES
+        int row = jTableArticles.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
+        
+        if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
+            System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
+            int idArticle = (int) jTableArticles.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
+            this.ID_Select_Article = idArticle;
+            System.out.println("L'ID de l'article selectionne est "+idArticle);
+            this.RemplirFicheArticle(idArticle);
+        }
+    }//GEN-LAST:event_clickArticle
+
+    private void jButtonModifierArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifierArticleActionPerformed
+        try {
+            // TODO add your handling code here:
+            System.out.println("Modification d'un article");
+            
+            // On récupère les valeurs des TextFields :
+            String libelleArticleMod = jTextFieldLibelleArticle.getText();
+            String stockArticleMod = jTextFieldStockArticle.getText();
+            String prixArticleMod = jTextFieldPrixArticle.getText();
+            String referenceArticleMod = jTextFieldRefArticle.getText();
+            
+            String requete = "UPDATE `t_article` SET `libelle`=\""+libelleArticleMod+"\", `reference`='"+referenceArticleMod+"',`prix`='"+prixArticleMod+"',`stock`='"+stockArticleMod+"' WHERE `Id_Article`='"+this.ID_Select_Article+"'"; // Récupération des données
+            Statement myStatement = this.connection.createStatement();
+            myStatement.executeUpdate(requete);
+            
+            this.viderTextFieldsArticles();
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButtonModifierArticleActionPerformed
+
+    private void jButtonSupprimerArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerArticleActionPerformed
+        try {
+            // TODO add your handling code here:
+            String requete = "DELETE FROM `t_article` WHERE `Id_Article`='"+this.ID_Select_Article+"'"; // Récupération des données
+            Statement myStatement = this.connection.createStatement();
+            myStatement.executeUpdate(requete);
+            this.viderTextFieldsArticles();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonSupprimerArticleActionPerformed
+
+    private void clickCommande(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickCommande
+        // TODO add your handling code here:
+        int row = jTableCommandes.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
+        
+        if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
+            System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
+            int idCommande = (int) jTableCommandes.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
+            this.ID_Select_Commande = idCommande;
+            System.out.println("L'ID de la commande selectionne est "+idCommande);
+            this.RemplirFicheCommande(idCommande);
+        }
+    }//GEN-LAST:event_clickCommande
+
+    private void jButtonValiderCommandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderCommandeActionPerformed
+        try {
+            // TODO add your handling code here:
+            String requete = "UPDATE `t_commandes` SET `validation`='1' WHERE `id_commande`='"+this.ID_Select_Commande +"'" ;
+            Statement myStatement = this.connection.createStatement();
+            myStatement.executeUpdate(requete);
+            this.viderTextFieldsCommande();
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonValiderCommandeActionPerformed
+
+    private void jButtonRefuserCommandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefuserCommandeActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonRefuserCommandeActionPerformed
+    
     public void RemplirFicheClients(int idClient){
         try {
             String requete = "SELECT * FROM `t_clients` WHERE `Id_Client` = "+idClient;
@@ -803,6 +1005,145 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void RemplirFicheArticle(int idArticle){
+        try {
+            String requete = "SELECT * FROM `t_article` WHERE `Id_Article` = "+idArticle;
+            Statement myStatement = this.connection.createStatement();
+            ResultSet infosArticle = myStatement.executeQuery(requete);
+            infosArticle.next();
+            String libelle = infosArticle.getString(2);
+            String stock = infosArticle.getString(7);
+            String genre = infosArticle.getString(3);
+            String prix = infosArticle.getString(5);
+            String reference = infosArticle.getString(4);
+            
+            // Recuperation du genre de l'article :
+            requete = "SELECT `libelle_Genre` FROM `t_genre` WHERE `Id_Genre`='"+genre+"'";
+            ResultSet genreArticle = myStatement.executeQuery(requete);
+            
+            genreArticle.next();
+            
+            System.out.println(genreArticle.getString(1));
+            
+            jTextFieldLibelleArticle.setText(libelle);
+            jTextFieldStockArticle.setText(stock);
+            jLabelGenreArticle.setText(genreArticle.getString(1));
+            jTextFieldPrixArticle.setText(prix);
+            jTextFieldRefArticle.setText(reference);
+            
+            jButtonModifierArticle.setEnabled(true);
+            jButtonSupprimerArticle.setEnabled(true);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void RemplirFicheCommande(int idCommande){
+        try {
+            // D'abord les infos de la commande
+            String requete = "SELECT * FROM `t_commandes` WHERE `id_commande` = '"+idCommande+"' AND `validation`='0'";
+            Statement myStatement = this.connection.createStatement();
+            ResultSet infosCommande = myStatement.executeQuery(requete);
+            infosCommande.next();
+            System.out.println(infosCommande.getString(4));
+            
+            jLabelPrixCommande.setText(infosCommande.getString(4)+" €");
+            jTextFieldIdClient.setText(infosCommande.getString(3));
+            jTextFieldDateCommande.setText(infosCommande.getString(2));
+            
+            // Ensuite le contenu de la commande :
+            requete = "SELECT * FROM `t_articles_commandes`,`t_article` WHERE `id_commande`='"+idCommande+"' AND `t_article`.`Id_Article` = `t_articles_commandes`.`id_article`;";
+            infosCommande = myStatement.executeQuery(requete);
+            DefaultTableModel monTableau = new DefaultTableModel(); // Création du contenu du tableau
+            String[] entete = {"Article","Nombre","Prix indiv","Prix total"};
+            monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
+            Object[] ligne = new Object[4]; 
+            while (infosCommande.next()){
+                ligne[0] = infosCommande.getString(6); // Libellé article
+                ligne[1] = infosCommande.getString(3); // Nombre d'articles
+                ligne[2] = infosCommande.getString(9); // Prix individuel
+                ligne[3] = infosCommande.getFloat(3)*infosCommande.getFloat(9); // Prix total
+                monTableau.addRow(ligne);
+            } 
+            
+            jTableContenuCommande.setModel(monTableau);
+            
+            while (infosCommande.next()){
+                System.out.println(infosCommande.getString(6));
+            }
+            
+            jButtonValiderCommande.setEnabled(true);
+            jButtonRefuserCommande.setEnabled(true);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    public void RemplirListeArticles(){
+        try {
+            // On va récupérer tous les clients
+            
+            int nbColonnes = 3;
+            DefaultTableModel monTableau = new DefaultTableModel(); // Création du contenu du tableau
+            String requete = "SELECT * FROM `t_article` WHERE 1"; // Récupération des données
+            String[] entete = {"ID","Libellé","Stock"};
+            monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
+            Statement myStatement = this.connection.createStatement(); 
+            ResultSet articles = myStatement.executeQuery(requete); // On récupère tous les clients dans le resultset
+            Object[] ligne = new Object[nbColonnes]; 
+            
+            while (articles.next()){
+                ligne[0] = articles.getObject(1);
+                ligne[1] = articles.getObject(2);
+                ligne[2] = articles.getObject(7);
+                monTableau.addRow(ligne);
+            }
+            System.out.println("Coucou articles");
+            jTableArticles.setModel(monTableau);
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void RemplirListeCommandes(){
+        try {
+            // On va récupérer tous les clients
+            
+            int nbColonnes = 3;
+            DefaultTableModel monTableau = new DefaultTableModel(); // Création du contenu du tableau
+            String requete = "SELECT * FROM `t_commandes` WHERE `validation`='0'"; // Récupération des données
+            String[] entete = {"ID","Date","Client"};
+            String nomClient;
+            monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
+            Statement myStatementClient = this.connection.createStatement(); 
+            Statement myStatementArticle = this.connection.createStatement(); 
+            ResultSet articles = myStatementArticle.executeQuery(requete); // On récupère tous les clients dans le resultset
+            ResultSet client;
+            Object[] ligne = new Object[nbColonnes]; 
+            System.out.println("Yo");
+            while (articles.next()){
+                ligne[0] = articles.getObject(1);
+                ligne[1] = articles.getObject(2);
+                requete = "SELECT `nom`, `prenom` FROM `t_clients` WHERE `Id_Client` ='"+articles.getObject(3)+"'";
+                System.out.println("Yo 2 !");
+                client = myStatementClient.executeQuery(requete);
+                client.next();
+                System.out.println("Yo 3 ?\n"+client.getObject(2).toString());
+                nomClient = client.getObject(2).toString()+" "+client.getObject(1).toString();
+                System.out.println("Yo 3.25 !");
+                ligne[2] = nomClient;
+                System.out.println("Yo 3.5 ???");
+                monTableau.addRow(ligne);
+                System.out.println("Yo 4 ?!");
+            }
+            System.out.println("Coucou commandes");
+            jTableCommandes.setModel(monTableau);
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void RemplirListeClients(){
         
         try {
@@ -872,7 +1213,9 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JButton jButtonModifierArticle;
     private javax.swing.JButton jButtonModifierClient;
     private javax.swing.JButton jButtonRafraichirAlertes;
+    private javax.swing.JButton jButtonRafraichirArticles;
     private javax.swing.JButton jButtonRafraichirClients;
+    private javax.swing.JButton jButtonRafraichirCommandes;
     private javax.swing.JButton jButtonRafraichirHistorique;
     private javax.swing.JButton jButtonRefuserCommande;
     private javax.swing.JButton jButtonSupprimerArticle;
@@ -897,6 +1240,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelGenreArticle;
     private javax.swing.JLabel jLabelPrixCommande;
     private javax.swing.JList<String> jListArticlesCommande;
     private javax.swing.JPanel jPanelAlertes;
