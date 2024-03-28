@@ -111,23 +111,31 @@ unset($_POST['mot_de_passe']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
 </head>
-<body>
-    <h2>Inscription</h2>
+<body class = bodyInscrip>
+<div class="InscripArea">
+    <h2 class="h2Inscrip">Inscription</h2>
     <form method="post" action="./inscription.php">
-        <label for="nom">Nom:</label><br>
-        <input type="text" id="nom" name="nom"><br>
-        <label for="prenom">Prénom:</label><br>
-        <input type="text" id="prenom" name="prenom"><br>
-        <label for="adresse">Adresse:</label><br>
-        <input type="text" id="adresse" name="adresse"><br>
-        <label for="numero">Numéro de téléphone:</label><br>
-        <input type="text" id="numero" name="numero"><br>
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="mot_de_passe">Mot de passe:</label><br>
-        <input type="password" id="mot_de_passe" name="mot_de_passe"><br><br>
-        <input type="submit" value="S'inscrire" >
+        <label  class="labelInscrip" for="nom">Nom:</label><br>
+        <input class="inputConnect" type="text" id="nom" name="nom"><br><br>
+
+        <label  class="labelInscrip" for="prenom">Prénom:</label><br>
+        <input class="inputConnect" type="text" id="prenom" name="prenom"><br><br>
+
+        <label  class="labelInscrip" for="adresse">Adresse:</label><br>
+        <input class="inputConnect" type="text" id="adresse" name="adresse"><br><br>
+
+        <label  class="labelInscrip" for="numero">Numéro de téléphone:</label><br>
+        <input class="inputConnect" type="text" id="numero" name="numero"><br><br>
+
+        <label  class="labelInscrip" for="email">Email:</label><br>
+        <input class="inputConnect" type="email" id="email" name="email"><br><br>
+
+        <label  class="labelInscrip" for="mot_de_passe">Mot de passe:</label><br>
+        <input class="inputConnect" type="password" id="mot_de_passe" name="mot_de_passe"><br><br>
+
+        <input type="submit" value="S'inscrire" class="btnSInscrip" >
     </form>
+    </div>
 </body>
 </html>
 

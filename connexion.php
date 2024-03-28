@@ -110,15 +110,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
 </head>
-<body>
-    <h2>Connexion</h2>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="email_connexion">Email:</label><br>
-        <input type="email" id="email_connexion" name="email_connexion"><br>
-        <label for="mot_de_passe_connexion">Mot de passe:</label><br>
-        <input type="password" id="mot_de_passe_connexion" name="mot_de_passe_connexion"><br><br>
-        <input type="submit" value="Se connecter">
-    </form>
-    <p>Pas de compte ? <a href="Inscription.php">Créez en un !</a></p>
+<body class = bodyConnect>
+   <div class="connectArea">
+        <h2 class="h2Connect">Connexion</h2><br>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <label class="labelConnect" for="email_connexion">Email:</label><br>
+            <input class="inputConnect" type="email" id="email_connexion" name="email_connexion"><br><br>
+
+            <label class="labelConnect" for="mot_de_passe_connexion">Mot de passe:</label><br>
+            <input class="inputConnect"type="password" id="mot_de_passe_connexion" name="mot_de_passe_connexion"><br><br>
+            
+            <input type="submit" value="Se connecter" class="btnConnect"><br>
+        </form>
+        
+        <br><p class="lienInscription"><a href="Inscription.php" class="lienInscription">Pas de compte ? Créez en un !</a></p>
+    </div>
 </body>
 </html>
