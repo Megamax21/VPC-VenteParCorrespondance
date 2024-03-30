@@ -24,10 +24,10 @@ public final class IHM_Responsable extends javax.swing.JFrame {
      * Creates new form IHM_Responsable
      */
     public Connection connection = null;
-    public int ID_Select_Client = 0;
-    public int ID_Select_Article= 0;
+    public int ID_Select_Client=0;
+    public int ID_Select_Article=0;
     public int ID_Select_Commande=0;
-    
+    public int ID_Select_Commande_Historique=0;
     public IHM_Responsable() {
         initComponents();
         jTabbedPaneFenetre.setVisible(false);
@@ -52,6 +52,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             this.RemplirListeClients();
             this.RemplirListeArticles();
             this.RemplirListeCommandes();
+            this.RemplirListeCommandesHist();
             
             
         } catch (SQLException ex) {
@@ -68,6 +69,10 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialogRefusCommande = new javax.swing.JDialog();
+        jLabel7 = new javax.swing.JLabel();
+        jButtonRefuserRefusCommande = new javax.swing.JButton();
+        jButtonValiderRefusCommande = new javax.swing.JButton();
         jTabbedPaneFenetre = new javax.swing.JTabbedPane();
         jPanelClients = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -128,11 +133,15 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButtonRafraichirAlertes = new javax.swing.JButton();
         jPanelHistorique = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListArticlesCommande = new javax.swing.JList<>();
         jScrollPane7 = new javax.swing.JScrollPane();
         jTableCommandesHist = new javax.swing.JTable();
         jButtonRafraichirHistorique = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelHistoriquePrixTotal = new javax.swing.JLabel();
+        jLabelClientHistorique = new javax.swing.JLabel();
+        jScrollPaneHistoriqueArticles = new javax.swing.JScrollPane();
+        jTextAreaHistoriqueArticles = new javax.swing.JTextArea();
         jPanelConnexion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldConnectName = new javax.swing.JTextField();
@@ -140,6 +149,51 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButtonConnexion = new javax.swing.JButton();
+
+        jLabel7.setFont(new java.awt.Font("Amiri Quran", 1, 24)); // NOI18N
+        jLabel7.setText("Etes vous sur de vouloir refuser cette commande ?");
+
+        jButtonRefuserRefusCommande.setText("NON");
+        jButtonRefuserRefusCommande.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefuserRefusCommandeActionPerformed(evt);
+            }
+        });
+
+        jButtonValiderRefusCommande.setText("OUI");
+        jButtonValiderRefusCommande.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonValiderRefusCommandeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jDialogRefusCommandeLayout = new javax.swing.GroupLayout(jDialogRefusCommande.getContentPane());
+        jDialogRefusCommande.getContentPane().setLayout(jDialogRefusCommandeLayout);
+        jDialogRefusCommandeLayout.setHorizontalGroup(
+            jDialogRefusCommandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogRefusCommandeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogRefusCommandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogRefusCommandeLayout.createSequentialGroup()
+                        .addComponent(jButtonValiderRefusCommande, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRefuserRefusCommande, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialogRefusCommandeLayout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jDialogRefusCommandeLayout.setVerticalGroup(
+            jDialogRefusCommandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogRefusCommandeLayout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogRefusCommandeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonValiderRefusCommande, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRefuserRefusCommande, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,7 +254,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                         .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldMailClient)
                             .addComponent(jTextFieldNumClient)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                             .addGroup(jPanelModifClientLayout.createSequentialGroup()
                                 .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldNomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -430,7 +484,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addGroup(jPanelArticlesLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(jButtonRafraichirArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(113, Short.MAX_VALUE))
+                        .addContainerGap(91, Short.MAX_VALUE))
                     .addGroup(jPanelArticlesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanelModifClient1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -585,7 +639,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addGroup(jPanelCommandesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCommandesLayout.createSequentialGroup()
                         .addComponent(jLabel21)
-                        .addGap(0, 55, Short.MAX_VALUE))
+                        .addGap(0, 35, Short.MAX_VALUE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelModifClient2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -639,7 +693,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addGroup(jPanelAlertesLayout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(jButtonRafraichirAlertes)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanelAlertesLayout.setVerticalGroup(
             jPanelAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -653,14 +707,6 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
         jTabbedPaneFenetre.addTab("Alertes", jPanelAlertes);
 
-        jListArticlesCommande.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Article 1 x5", "Article 2 x3", "Article 5 x4" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jListArticlesCommande.setEnabled(false);
-        jScrollPane1.setViewportView(jListArticlesCommande);
-
         jTableCommandesHist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -672,9 +718,29 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 "ID Commande", "ID Client", "Date"
             }
         ));
+        jTableCommandesHist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickHistorique(evt);
+            }
+        });
         jScrollPane7.setViewportView(jTableCommandesHist);
 
         jButtonRafraichirHistorique.setText("Rafraichir");
+        jButtonRafraichirHistorique.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRafraichirHistoriqueActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Client :");
+
+        jLabel9.setText("Prix Total :");
+
+        jScrollPaneHistoriqueArticles.setEnabled(false);
+
+        jTextAreaHistoriqueArticles.setColumns(20);
+        jTextAreaHistoriqueArticles.setRows(5);
+        jScrollPaneHistoriqueArticles.setViewportView(jTextAreaHistoriqueArticles);
 
         javax.swing.GroupLayout jPanelHistoriqueLayout = new javax.swing.GroupLayout(jPanelHistorique);
         jPanelHistorique.setLayout(jPanelHistoriqueLayout);
@@ -684,7 +750,18 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+                .addGroup(jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabelClientHistorique, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelHistoriquePrixTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
+                        .addComponent(jScrollPaneHistoriqueArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 16, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
                 .addGap(201, 201, 201)
@@ -695,10 +772,19 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
+                        .addGroup(jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabelClientHistorique, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelHistoriquePrixTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPaneHistoriqueArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jButtonRafraichirHistorique)
                 .addContainerGap())
         );
@@ -977,8 +1063,92 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
     private void jButtonRefuserCommandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefuserCommandeActionPerformed
         // TODO add your handling code here:
-        
+        this.jDialogRefusCommande.setVisible(true);
     }//GEN-LAST:event_jButtonRefuserCommandeActionPerformed
+
+    private void jButtonValiderRefusCommandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValiderRefusCommandeActionPerformed
+        try {
+            // On supprime dans l'onglet commande
+            String requete = "DELETE FROM `t_commandes` WHERE `id_commande` = "+this.ID_Select_Commande;
+            Statement myStatement = this.connection.createStatement();
+            myStatement.executeUpdate(requete);
+            
+            // On supprime les articles de la commande
+            requete = "DELETE FROM `t_articles_commandes` WHERE `id_commande` = "+this.ID_Select_Commande;
+            myStatement.executeUpdate(requete);
+            this.ID_Select_Commande = 0;
+            this.viderTextFieldsCommande();
+            this.jDialogRefusCommande.setVisible(false);
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButtonValiderRefusCommandeActionPerformed
+
+    private void jButtonRefuserRefusCommandeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefuserRefusCommandeActionPerformed
+        // TODO add your handling code here:
+        this.jDialogRefusCommande.setVisible(false);
+    }//GEN-LAST:event_jButtonRefuserRefusCommandeActionPerformed
+
+    private void jButtonRafraichirHistoriqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRafraichirHistoriqueActionPerformed
+        // TODO add your handling code here:
+        this.RemplirListeCommandesHist();
+    }//GEN-LAST:event_jButtonRafraichirHistoriqueActionPerformed
+
+    private void clickHistorique(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickHistorique
+        // TODO add your handling code here:
+        int row = jTableCommandesHist.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
+        
+        if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
+            System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
+            int idCommande = (int) jTableCommandesHist.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
+            this.ID_Select_Commande_Historique = idCommande;
+            System.out.println("L'ID de la commande selectionne est "+idCommande);
+            this.RemplirFicheCommandeHistorique(idCommande);
+        }
+    }//GEN-LAST:event_clickHistorique
+    
+    public void RemplirFicheCommandeHistorique(int idCommande){
+        try {
+            jTextAreaHistoriqueArticles.setText("");
+            // D'abord le prix total de la commande
+            String requete = "SELECT * FROM `t_commandes` WHERE `id_commande` = '"+idCommande+"'";
+            Statement myStatement = this.connection.createStatement();
+            ResultSet infosCommande = myStatement.executeQuery(requete);
+            infosCommande.next();
+            System.out.println(infosCommande.getString(4));
+            
+            jLabelHistoriquePrixTotal.setText(infosCommande.getString(4)+" €");
+            String idClient = infosCommande.getString(3);
+
+            // On récupère maintenant le nom et le prénom du client :
+            requete = "SELECT * FROM `t_clients` WHERE `Id_Client`='"+idClient+"'";
+            ResultSet monClient = myStatement.executeQuery(requete);
+            monClient.next();
+            String nomClient = monClient.getString(2).toUpperCase()+" "+monClient.getString(3);
+            jLabelClientHistorique.setText(nomClient);
+            
+            // Ensuite le contenu de la commande :
+            requete = "SELECT * FROM `t_articles_commandes`,`t_article` WHERE `id_commande`='"+idCommande+"' AND `t_article`.`Id_Article` = `t_articles_commandes`.`id_article`;";
+            infosCommande = myStatement.executeQuery(requete);
+            DefaultTableModel monTableau = new DefaultTableModel(); // Création du contenu du tableau
+            String[] entete = {"Article","Nombre","Prix indiv","Prix total"};
+            monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
+            String ligne = "";
+            while (infosCommande.next()){
+                ligne+=infosCommande.getString(6)+"  x"; // Libellé article
+                ligne+=infosCommande.getString(3)+"   "; // Nombre d'articles
+                ligne+=infosCommande.getFloat(3)*infosCommande.getFloat(9)+"€ \n"; // Prix total
+                jTextAreaHistoriqueArticles.append(ligne);
+                ligne = "";
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
     
     public void RemplirFicheClients(int idClient){
         try {
@@ -1143,6 +1313,32 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void RemplirListeCommandesHist(){
+        try {
+            // On va récupérer tous les clients
+            
+            int nbColonnes = 3;
+            DefaultTableModel monTableau = new DefaultTableModel(); // Création du contenu du tableau
+            String requete = "SELECT * FROM `t_commandes` WHERE `validation`='1'"; // Récupération des données
+            String[] entete = {"ID","Date"};
+            monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
+            Statement myStatementArticle = this.connection.createStatement(); 
+            ResultSet articles = myStatementArticle.executeQuery(requete); // On récupère tous les clients dans le resultset
+            Object[] ligne = new Object[nbColonnes];
+            System.out.println("Yo");
+            while (articles.next()){
+                ligne[0] = articles.getObject(1);
+                ligne[1] = articles.getObject(2);
+                
+                monTableau.addRow(ligne);
+                System.out.println("Yo 4 ?!");
+            }
+            System.out.println("Coucou commandes");
+            jTableCommandesHist.setModel(monTableau);
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     public void RemplirListeClients(){
         
@@ -1218,9 +1414,12 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRafraichirCommandes;
     private javax.swing.JButton jButtonRafraichirHistorique;
     private javax.swing.JButton jButtonRefuserCommande;
+    private javax.swing.JButton jButtonRefuserRefusCommande;
     private javax.swing.JButton jButtonSupprimerArticle;
     private javax.swing.JButton jButtonSupprimerClient;
     private javax.swing.JButton jButtonValiderCommande;
+    private javax.swing.JButton jButtonValiderRefusCommande;
+    private javax.swing.JDialog jDialogRefusCommande;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1241,9 +1440,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelClientHistorique;
     private javax.swing.JLabel jLabelGenreArticle;
+    private javax.swing.JLabel jLabelHistoriquePrixTotal;
     private javax.swing.JLabel jLabelPrixCommande;
-    private javax.swing.JList<String> jListArticlesCommande;
     private javax.swing.JPanel jPanelAlertes;
     private javax.swing.JPanel jPanelArticles;
     private javax.swing.JPanel jPanelClients;
@@ -1253,7 +1456,6 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelModifClient;
     private javax.swing.JPanel jPanelModifClient1;
     private javax.swing.JPanel jPanelModifClient2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1261,6 +1463,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPaneHistoriqueArticles;
     private javax.swing.JTabbedPane jTabbedPaneFenetre;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableArticles;
@@ -1269,6 +1472,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JTable jTableCommandesHist;
     private javax.swing.JTable jTableContenuCommande;
     private javax.swing.JTextArea jTextAreaAdresse;
+    private javax.swing.JTextArea jTextAreaHistoriqueArticles;
     private javax.swing.JTextField jTextFieldConnectName;
     private javax.swing.JTextField jTextFieldConnectPWord;
     private javax.swing.JTextField jTextFieldDateCommande;
