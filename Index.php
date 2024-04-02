@@ -9,9 +9,10 @@
 
     </head>
     <body>
+       
         <div id="header">
             <div class="logo">
-                <img class="logoLSC" src="lesupercoin_carré" href="#"></img>
+                <img class="logoLSC" src="./images/lesupercoin_carré.png" href="#"></img>
             </div>  
             <nav>
                 <form class="search" action="search.php"> 
@@ -22,7 +23,7 @@
                     <a href="Index.php">Accueil</a>
                 </li>
                 <li class="dropdown">
-                    <a href="">Boutique</a>
+                    <a href="boutique.php">Boutique</a>
                     <ul>
                         <li><a href="#">Enfant</a></li>
                         <li><a href="#">Femme</a></li>
@@ -45,6 +46,7 @@
                 </ul>
             </nav>
         </div>
+        
     </body>
     
 </html>
@@ -58,3 +60,12 @@
     });
 </script>
 
+<html>
+<div class="bg-image"></div>
+
+<div class="bg-text">
+  <h1>BIENVENUE SUR LE SUPER COIN</h1>
+  <p>VOTRE SITE DE VENTE PAR CORRESPONDANCE PRÉFÉRÉ</p>
+</div>
+
+</html>

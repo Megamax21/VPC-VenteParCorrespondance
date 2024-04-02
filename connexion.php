@@ -10,7 +10,7 @@
     <body>
         <div id="header">
             <div class="logo">
-                <img class="logoLSC" src="lesupercoin_carré" href="#"></img>
+                <img class="logoLSC" src="./images/lesupercoin_carré.png" href="#"></img>
             </div>  
             <nav>
                 <form class="search" action="search.php"> 
@@ -21,7 +21,7 @@
                     <a href="Index.php">Accueil</a>
                 </li>
                 <li class="dropdown">
-                    <a href="">Boutique</a>
+                    <a href="boutique.php">Boutique</a>
                     <ul>
                         <li><a href="#">Enfant</a></li>
                         <li><a href="#">Femme</a></li>
@@ -91,10 +91,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && 
             header('Location: Index.php');
             exit();
         } else {
-            echo "Mot de passe incorrect.";
+            echo "<br><br><p class='erreurCON'>Mot de passe incorrect.<p>";
         }
     } else {
-        echo "Aucun compte trouvé avec cet e-mail.";
+        echo "<br><br><p class='erreurCON'>Aucun compte trouvé avec cet e-mail.<p>";
     }
 
     $requete->close();
@@ -110,7 +110,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
 </head>
+
 <body class = bodyConnect>
+<div class="bg-image">
+
    <div class="connectArea">
         <h2 class="h2Connect">Connexion</h2><br>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -119,11 +122,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && 
 
             <label class="labelConnect" for="mot_de_passe_connexion">Mot de passe:</label><br>
             <input class="inputConnect"type="password" id="mot_de_passe_connexion" name="mot_de_passe_connexion"><br><br>
-            
+
             <input type="submit" value="Se connecter" class="btnConnect"><br>
         </form>
         
         <br><p class="lienInscription"><a href="Inscription.php" class="lienInscription">Pas de compte ? Créez en un !</a></p>
     </div>
+</div>
 </body>
 </html>

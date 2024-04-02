@@ -30,7 +30,7 @@
     width: 300px;
     height: 350px;
     border-radius: 30px;
-    margin: 40px auto 0px auto;
+    margin: 0px auto 0px auto;
 
 }
 
@@ -48,16 +48,32 @@
     box-shadow: 0 7px #045339;
     }  
     
-    .btnConnect:hover{
-      background-color: #06d39c;  
-    }
+.btnConnect:hover{
+    background-color: #06d39c;  
+}
+
+.btnConnect:active{
+    background-color: #06d39c;
+    box-shadow: 0 3px #045339;
+    transform: translateY(4px);
+}
+
+.inputConnect{
+    width: 250px;
+}
+
+.erreurCON{
+    text-shadow: red 1px 0 10px;
+}
+
+.bg-image {
+
+    background-image: url("../images/boutique_épurée-modified.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     
-    .btnConnect:active{
-      background-color: #06d39c;
-      box-shadow: 0 3px #045339;
-      transform: translateY(4px);
-    }
-    
-    .inputConnect{
-        width: 250px;
-    }
+    padding-top: 30px;
+}
+

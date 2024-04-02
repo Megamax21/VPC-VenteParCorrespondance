@@ -10,7 +10,7 @@
     <body>
         <div id="header">
             <div class="logo">
-                <img class="logoLSC" src="lesupercoin_carré" href="#"></img>
+                <img class="logoLSC" src="./images/lesupercoin_carré.png" href="#"></img>
             </div>  
             <nav>
                 <form class="search" action="search.php"> 
@@ -21,7 +21,7 @@
                     <a href="Index.php">Accueil</a>
                 </li>
                 <li class="dropdown">
-                    <a href="">Boutique</a>
+                    <a href="boutique.php">Boutique</a>
                     <ul>
                         <li><a href="#">Enfant</a></li>
                         <li><a href="#">Femme</a></li>
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     if (empty($nom) || empty($email) || empty($mot_de_passe)) {
-        echo "Veuillez remplir tous les champs.";
+        echo "<br><br><p class='erreurCON'>Veuillez remplir tous les champs.<p>";
     } else {
         $connexion = new mysqli("localhost:3306", "VPC", "123456", "vpc");
 
@@ -82,11 +82,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $requete = $connexion->prepare("INSERT INTO `t_clients`(`nom`, `prenom`, `adresse`, `numero`, `mail`, `mdp`) VALUES ('$nom','$prenom','$adresse','$numero','$email','$mot_de_passe')");
 
         if ($requete->execute()) {
-            echo "Inscription réussie !";
+            echo "<br><br><p class='validInscrip'>Inscription réussie !<p>";
             header('Location: connexion.php');
 
         } else {
-            echo "Erreur lors de l'inscription : " . $requete->error;
+            echo "<br><br><p class='erreurCON'>Erreur lors de l'inscription : <p>" . $requete->error;
         }
 
         $requete->close();
@@ -112,30 +112,32 @@ unset($_POST['mot_de_passe']);
     <title>Inscription</title>
 </head>
 <body class = bodyInscrip>
-<div class="InscripArea">
-    <h2 class="h2Inscrip">Inscription</h2>
-    <form method="post" action="./inscription.php">
-        <label  class="labelInscrip" for="nom">Nom:</label><br>
-        <input class="inputConnect" type="text" id="nom" name="nom"><br><br>
+<div class="bg-image">
+    <div class="InscripArea">
+        <h2 class="h2Inscrip">Inscription</h2>
+        <form method="post" action="./inscription.php">
+            <label  class="labelInscrip" for="nom">Nom:</label><br>
+            <input class="inputConnect" type="text" id="nom" name="nom"><br><br>
 
-        <label  class="labelInscrip" for="prenom">Prénom:</label><br>
-        <input class="inputConnect" type="text" id="prenom" name="prenom"><br><br>
+            <label  class="labelInscrip" for="prenom">Prénom:</label><br>
+            <input class="inputConnect" type="text" id="prenom" name="prenom"><br><br>
 
-        <label  class="labelInscrip" for="adresse">Adresse:</label><br>
-        <input class="inputConnect" type="text" id="adresse" name="adresse"><br><br>
+            <label  class="labelInscrip" for="adresse">Adresse:</label><br>
+            <input class="inputConnect" type="text" id="adresse" name="adresse"><br><br>
 
-        <label  class="labelInscrip" for="numero">Numéro de téléphone:</label><br>
-        <input class="inputConnect" type="text" id="numero" name="numero"><br><br>
+            <label  class="labelInscrip" for="numero">Numéro de téléphone:</label><br>
+            <input class="inputConnect" type="text" id="numero" name="numero"><br><br>
 
-        <label  class="labelInscrip" for="email">Email:</label><br>
-        <input class="inputConnect" type="email" id="email" name="email"><br><br>
+            <label  class="labelInscrip" for="email">Email:</label><br>
+            <input class="inputConnect" type="email" id="email" name="email"><br><br>
 
-        <label  class="labelInscrip" for="mot_de_passe">Mot de passe:</label><br>
-        <input class="inputConnect" type="password" id="mot_de_passe" name="mot_de_passe"><br><br>
+            <label  class="labelInscrip" for="mot_de_passe">Mot de passe:</label><br>
+            <input class="inputConnect" type="password" id="mot_de_passe" name="mot_de_passe"><br><br>
 
-        <input type="submit" value="S'inscrire" class="btnSInscrip" >
-    </form>
+            <input type="submit" value="S'inscrire" class="btnSInscrip" >
+        </form>
     </div>
+</div>
 </body>
 </html>
 

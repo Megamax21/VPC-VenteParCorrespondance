@@ -10,18 +10,18 @@
 }
 
 .labelInscrip{
-    
+
     color: white;
 }
 
 .InscripArea{
-    
+
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0#00a478;
     background-color: #00a478;
     width: 300px;
     height: 625px;
     border-radius: 30px;
-    margin: 40px auto 0px auto;
+    margin: 0px auto 0px auto;
 
 }
 
@@ -38,18 +38,39 @@
     border-radius: 50px;
     border: none;
     box-shadow: 0 7px #045339;
-    }  
-    
-    .btnSInscrip:hover{
-      background-color: #06d39c;  
-    }
-    
-    .btnSInscrip:active{
-      background-color: #06d39c;
-      box-shadow: 0 3px #045339;
-      transform: translateY(4px);
-    }
+}  
 
-    .inputConnect{
-        width: 250px;
-    }
+.btnSInscrip:hover{
+    background-color: #06d39c;  
+}
+
+.btnSInscrip:active{
+    background-color: #06d39c;
+    box-shadow: 0 3px #045339;
+    transform: translateY(4px);
+}
+
+.inputConnect{
+    width: 250px;
+}
+
+.erreurCON{
+    text-shadow: red 1px 0 10px;
+}
+
+.validInscrip{
+    text-shadow: rgb(21, 255, 21) 1px 0 10px;
+}
+
+.bg-image {
+
+    background-image: url("../images/boutique_épurée-modified.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 30px;
+}
+
+
+
