@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($nom) || empty($email) || empty($mot_de_passe)) {
         echo "<br><br><p class='erreurCON'>Veuillez remplir tous les champs.<p>";
     } else {
-        $connexion = new mysqli("localhost:3306", "VPC", "123456", "vpc");
+        $connexion = new mysqli("localhost:3306", "VPC", "e(pVXblgUK)]QUW-", "vpc");
 
         if ($connexion->connect_error) {
             die("Échec de la connexion à la base de données : " . $connexion->connect_error);

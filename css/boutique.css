@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+.sidebar {
+    flex-basis: 20%;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+.content {
+    flex-basis: 60%;
+    padding: 20px;
+}
+.cart {
+    flex-basis: 20%;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+}
+/* Styles CSS pour le panier */
+.cart-item {
+    margin-bottom: 10px;
+}
+/* Styles CSS pour les filtres */
+.filter {
+    margin-bottom: 20px;
+}

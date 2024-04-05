@@ -52,9 +52,9 @@
 //   ------------------------------------------------------------------------------CONNEXION--------------------------------------------------------------------------------------
 session_start();
 
-$serveur = "localhost";
+$serveur = "localhost:3306";
 $utilisateur = "VPC";
-$mot_de_passe_bdd = "123456";
+$mot_de_passe_bdd = "e(pVXblgUK)]QUW-";
 $nom_bdd = "vpc";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email_connexion']) && isset($_POST['mot_de_passe_connexion'])) {

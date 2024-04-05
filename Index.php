@@ -25,12 +25,12 @@
                 <li class="dropdown">
                     <a href="boutique.php">Boutique</a>
                     <ul>
-                        <li><a href="#">Enfant</a></li>
-                        <li><a href="#">Femme</a></li>
-                        <li><a href="#">Homme</a></li>
-                        <li><a href="#">Tous</a></li>
+                        <li><a href="boutique.php">Enfant</a></li>
+                        <li><a href="boutique.php">Femme</a></li>
+                        <li><a href="boutique.php">Homme</a></li>
+                        <li><a href="boutique.php">Tous</a></li>
                     </ul>        
-                </li>
+                </li> 
                 <li class="dropdown">
                     <a href="">Compte</a>
                     <ul>
