@@ -32,17 +32,17 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         initComponents();
         jTabbedPaneFenetre.setVisible(false);
         
-        /* A décommenter si je suis au lycée ! ! !
-        String url = "jdbc:mysql://10.194.196.225:3306/vpc";
+        /* A décommenter si je suis au lycée ! ! ! 
+        String url = "jdbc:mysql://10.194.196.80:3306/vpc";
         String user = "VPC";
-        String password = "123456";
+        String password = "e(pVXblgUK)]QUW-";
         */
-        /* A décommenter si je suis hors des cours ! ! ! */
+        /* A décommenter si je suis hors des cours ! ! !  */
         String url = "jdbc:mysql://localhost/vpc";
         String user = "root";
         String password = "";
         System.out.println("COMMENCEMENT");
-        
+       
              
         try {
             this.connection = DriverManager.getConnection(url,user,password);
@@ -54,6 +54,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             this.RemplirListeCommandes();
             this.RemplirListeCommandesHist();
             
+            this.RecuperationAlertes();
             
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
@@ -539,6 +540,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTableContenuCommande);
 
         jButtonValiderCommande.setText("Valider");
+        jButtonValiderCommande.setEnabled(false);
         jButtonValiderCommande.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonValiderCommandeActionPerformed(evt);
@@ -740,6 +742,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
         jTextAreaHistoriqueArticles.setColumns(20);
         jTextAreaHistoriqueArticles.setRows(5);
+        jTextAreaHistoriqueArticles.setEnabled(false);
         jScrollPaneHistoriqueArticles.setViewportView(jTextAreaHistoriqueArticles);
 
         javax.swing.GroupLayout jPanelHistoriqueLayout = new javax.swing.GroupLayout(jPanelHistorique);
@@ -976,7 +979,43 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         // TODO add your handling code here:
         viderTextFieldsArticles();
     }//GEN-LAST:event_jTableArticlesMousePressed
-
+    
+    public void RecuperationAlertes(){
+        try {
+            Statement statementIDArticles = this.connection.createStatement();
+            Statement stockArticles = this.connection.createStatement();
+            Statement stockArticlesCommande = this.connection.createStatement();
+            
+            ResultSet stockArticlesCommandeRes;
+            ResultSet stockArticleRes;
+            int nbArticlesCommandes = 0;
+            // Recuperation de tous les articles dans les commandes
+            String requete = "SELECT DISTINCT `id_article` FROM `t_articles_commandes`, `t_commandes` WHERE `t_commandes`.`id_commande` = `t_articles_commandes`.`id_commande` AND `t_commandes`.`validation`=0";
+            ResultSet articlesCommandes = statementIDArticles.executeQuery(requete);
+            System.out.println("RECUPERATION DES ALERTES");
+            while (articlesCommandes.next()){
+                // NB ARTICLES COMMANDES
+                requete = "SELECT `nb_articles` FROM `t_articles_commandes`, `t_commandes` WHERE `t_commandes`.`id_commande` = `t_articles_commandes`.`id_commande` AND `t_commandes`.`validation`=0 AND `t_articles_commandes`.`id_article` = '"+articlesCommandes.getString(1)+"'";
+                stockArticlesCommandeRes = stockArticlesCommande.executeQuery(requete);
+                while (stockArticlesCommandeRes.next()){
+                    nbArticlesCommandes += stockArticlesCommandeRes.getInt(1);
+                }
+                // NB ARTICLES STOCK
+                requete = "SELECT `stock` FROM `t_article` WHERE `Id_Article`='"+articlesCommandes.getString(1)+"'";
+                stockArticleRes = stockArticles.executeQuery(requete);
+                
+                while (stockArticleRes.next()){
+                    System.out.println(articlesCommandes.getString(1)+" | Stock commandes : "+nbArticlesCommandes+" | Stock : "+stockArticleRes.getInt(1));
+                }
+                nbArticlesCommandes = 0;
+            }
+            System.out.println("FIN DES ALERTES !");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void jButtonRafraichirArticlesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRafraichirArticlesActionPerformed
         // TODO add your handling code here:
         viderTextFieldsArticles();
@@ -1054,7 +1093,30 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             // TODO add your handling code here:
             String requete = "UPDATE `t_commandes` SET `validation`='1' WHERE `id_commande`='"+this.ID_Select_Commande +"'" ;
             Statement myStatement = this.connection.createStatement();
+            Statement articlesStock = this.connection.createStatement();
+            Statement modifArticles = this.connection.createStatement();
             myStatement.executeUpdate(requete);
+            int reste;
+            // On pense bien à faire le nombre d'articles qui se réduisent lorsque l'on valide une commande
+            requete = "SELECT * FROM `t_articles_commandes` WHERE `id_commande`='"+this.ID_Select_Commande+"'";
+            ResultSet mesArticlesCommande = myStatement.executeQuery(requete);
+            ResultSet mesArticlesStock;
+            while (mesArticlesCommande.next()){
+                requete = "SELECT * FROM `t_article` WHERE `Id_Article`='"+mesArticlesCommande.getString(1)+"'";
+                mesArticlesStock = articlesStock.executeQuery(requete);
+                
+                if (mesArticlesStock.next()){
+                    System.out.println("ARTICLE ID : "+mesArticlesStock.getString(1));
+                    System.out.println(" ARTICLE STOCK : "+mesArticlesStock.getString(7));
+                    System.out.println(" ARTICLE COMMANDE : "+mesArticlesCommande.getString(3));
+
+                    reste = mesArticlesStock.getInt(7) - mesArticlesCommande.getInt(3);
+                    System.out.println("DIFFERENCE = "+reste);
+                    requete = "UPDATE `t_article` SET `stock`='"+reste+"' WHERE `Id_Article`='"+mesArticlesStock.getString(1)+"'";
+                    modifArticles.executeUpdate(requete);
+                }
+                
+            }
             this.viderTextFieldsCommande();
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
@@ -1212,15 +1274,21 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     public void RemplirFicheCommande(int idCommande){
         try {
             // D'abord les infos de la commande
+            boolean okValider = true;
+            String requeteArticle;
             String requete = "SELECT * FROM `t_commandes` WHERE `id_commande` = '"+idCommande+"' AND `validation`='0'";
             Statement myStatement = this.connection.createStatement();
+            Statement statementArticles = this.connection.createStatement();
             ResultSet infosCommande = myStatement.executeQuery(requete);
+            ResultSet article;
             infosCommande.next();
             System.out.println(infosCommande.getString(4));
             
             jLabelPrixCommande.setText(infosCommande.getString(4)+" €");
             jTextFieldIdClient.setText(infosCommande.getString(3));
             jTextFieldDateCommande.setText(infosCommande.getString(2));
+            
+            String idArticle;
             
             // Ensuite le contenu de la commande :
             requete = "SELECT * FROM `t_articles_commandes`,`t_article` WHERE `id_commande`='"+idCommande+"' AND `t_article`.`Id_Article` = `t_articles_commandes`.`id_article`;";
@@ -1230,6 +1298,16 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
             Object[] ligne = new Object[4]; 
             while (infosCommande.next()){
+                // On vérifie si l'article est libre en stock :
+                idArticle = infosCommande.getString(1);
+                requeteArticle = "SELECT * FROM `t_article` WHERE `Id_Article` = '"+idArticle+"'";
+                article = statementArticles.executeQuery(requeteArticle);
+                article.next();
+                if (infosCommande.getInt(3)>article.getInt(7)){
+                    okValider = false;
+                    System.out.println("Pas assez d'article dispo pour l'article "+infosCommande.getString(3));
+                }
+                
                 ligne[0] = infosCommande.getString(6); // Libellé article
                 ligne[1] = infosCommande.getString(3); // Nombre d'articles
                 ligne[2] = infosCommande.getString(9); // Prix individuel
@@ -1237,13 +1315,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 monTableau.addRow(ligne);
             } 
             
+            System.out.println("COUCOU TOUT LE MONDE !"+okValider);
             jTableContenuCommande.setModel(monTableau);
-            
             while (infosCommande.next()){
                 System.out.println(infosCommande.getString(6));
             }
             
-            jButtonValiderCommande.setEnabled(true);
+            jButtonValiderCommande.setEnabled(okValider);
             jButtonRefuserCommande.setEnabled(true);
             
         } catch (SQLException ex) {
@@ -1287,25 +1365,21 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             String nomClient;
             monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
             Statement myStatementClient = this.connection.createStatement(); 
-            Statement myStatementArticle = this.connection.createStatement(); 
-            ResultSet articles = myStatementArticle.executeQuery(requete); // On récupère tous les clients dans le resultset
+            Statement myStatementCommande = this.connection.createStatement(); 
+            Statement myStatementArticles = this.connection.createStatement();
+            ResultSet commande = myStatementCommande.executeQuery(requete); // On récupère tous les clients dans le resultset
             ResultSet client;
             Object[] ligne = new Object[nbColonnes]; 
             System.out.println("Yo");
-            while (articles.next()){
-                ligne[0] = articles.getObject(1);
-                ligne[1] = articles.getObject(2);
-                requete = "SELECT `nom`, `prenom` FROM `t_clients` WHERE `Id_Client` ='"+articles.getObject(3)+"'";
-                System.out.println("Yo 2 !");
+            while (commande.next()){
+                ligne[0] = commande.getObject(1);
+                ligne[1] = commande.getObject(2); 
+                requete = "SELECT `nom`, `prenom` FROM `t_clients` WHERE `Id_Client` ='"+commande.getObject(3)+"'";
                 client = myStatementClient.executeQuery(requete);
                 client.next();
-                System.out.println("Yo 3 ?\n"+client.getObject(2).toString());
                 nomClient = client.getObject(2).toString()+" "+client.getObject(1).toString();
-                System.out.println("Yo 3.25 !");
                 ligne[2] = nomClient;
-                System.out.println("Yo 3.5 ???");
                 monTableau.addRow(ligne);
-                System.out.println("Yo 4 ?!");
             }
             System.out.println("Coucou commandes");
             jTableCommandes.setModel(monTableau);

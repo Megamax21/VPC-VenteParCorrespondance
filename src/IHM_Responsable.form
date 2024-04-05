@@ -817,6 +817,7 @@
                 <Component class="javax.swing.JButton" name="jButtonValiderCommande">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Valider"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonValiderCommandeActionPerformed"/>
@@ -1134,6 +1135,7 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
