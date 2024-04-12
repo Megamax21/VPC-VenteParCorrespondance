@@ -54,7 +54,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             this.RemplirListeCommandes();
             this.RemplirListeCommandesHist();
             
-            this.RecuperationAlertes();
+            //this.RecuperationAlertes();
             
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
@@ -514,6 +514,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jPanelModifClient2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButtonRefuserCommande.setText("Refuser");
+        jButtonRefuserCommande.setEnabled(false);
         jButtonRefuserCommande.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonRefuserCommandeActionPerformed(evt);
@@ -875,7 +876,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         int row = jTableClients.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
         
         if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
-            System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
+            // System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
             int idClient = (int) jTableClients.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
             this.ID_Select_Client = idClient;
             System.out.println("L'ID du client selectionne est "+idClient);
@@ -921,6 +922,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         tableauVideCommande.setColumnIdentifiers(entete);
         
         jTableContenuCommande.setModel(tableauVideCommande);
+        jButtonValiderCommande.setEnabled(false);
+        jButtonRefuserCommande.setEnabled(false);
         this.RemplirListeCommandes();
         
     }
@@ -982,33 +985,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     
     public void RecuperationAlertes(){
         try {
-            Statement statementIDArticles = this.connection.createStatement();
-            Statement stockArticles = this.connection.createStatement();
-            Statement stockArticlesCommande = this.connection.createStatement();
+            Statement myStatement = connection.createStatement();
             
-            ResultSet stockArticlesCommandeRes;
-            ResultSet stockArticleRes;
-            int nbArticlesCommandes = 0;
-            // Recuperation de tous les articles dans les commandes
-            String requete = "SELECT DISTINCT `id_article` FROM `t_articles_commandes`, `t_commandes` WHERE `t_commandes`.`id_commande` = `t_articles_commandes`.`id_commande` AND `t_commandes`.`validation`=0";
-            ResultSet articlesCommandes = statementIDArticles.executeQuery(requete);
-            System.out.println("RECUPERATION DES ALERTES");
-            while (articlesCommandes.next()){
-                // NB ARTICLES COMMANDES
-                requete = "SELECT `nb_articles` FROM `t_articles_commandes`, `t_commandes` WHERE `t_commandes`.`id_commande` = `t_articles_commandes`.`id_commande` AND `t_commandes`.`validation`=0 AND `t_articles_commandes`.`id_article` = '"+articlesCommandes.getString(1)+"'";
-                stockArticlesCommandeRes = stockArticlesCommande.executeQuery(requete);
-                while (stockArticlesCommandeRes.next()){
-                    nbArticlesCommandes += stockArticlesCommandeRes.getInt(1);
-                }
-                // NB ARTICLES STOCK
-                requete = "SELECT `stock` FROM `t_article` WHERE `Id_Article`='"+articlesCommandes.getString(1)+"'";
-                stockArticleRes = stockArticles.executeQuery(requete);
-                
-                while (stockArticleRes.next()){
-                    System.out.println(articlesCommandes.getString(1)+" | Stock commandes : "+nbArticlesCommandes+" | Stock : "+stockArticleRes.getInt(1));
-                }
-                nbArticlesCommandes = 0;
-            }
+            int higherValue = 0;
+            
+            String requete = "SELECT * FROM `t_commandes` WHERE `validation` = 0";
+            
+            
             System.out.println("FIN DES ALERTES !");
             
         } catch (SQLException ex) {
@@ -1032,7 +1015,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         int row = jTableArticles.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
         
         if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
-            System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
+            //System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
             int idArticle = (int) jTableArticles.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
             this.ID_Select_Article = idArticle;
             System.out.println("L'ID de l'article selectionne est "+idArticle);
@@ -1080,10 +1063,10 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         int row = jTableCommandes.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
         
         if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
-            System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
+            //System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
             int idCommande = (int) jTableCommandes.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
             this.ID_Select_Commande = idCommande;
-            System.out.println("L'ID de la commande selectionne est "+idCommande);
+            System.out.println("L'ID de la commande selectionnee est "+idCommande);
             this.RemplirFicheCommande(idCommande);
         }
     }//GEN-LAST:event_clickCommande
@@ -1106,18 +1089,20 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 mesArticlesStock = articlesStock.executeQuery(requete);
                 
                 if (mesArticlesStock.next()){
+                    /*
                     System.out.println("ARTICLE ID : "+mesArticlesStock.getString(1));
                     System.out.println(" ARTICLE STOCK : "+mesArticlesStock.getString(7));
                     System.out.println(" ARTICLE COMMANDE : "+mesArticlesCommande.getString(3));
-
+                    */
                     reste = mesArticlesStock.getInt(7) - mesArticlesCommande.getInt(3);
-                    System.out.println("DIFFERENCE = "+reste);
+                    // System.out.println("DIFFERENCE = "+reste);
                     requete = "UPDATE `t_article` SET `stock`='"+reste+"' WHERE `Id_Article`='"+mesArticlesStock.getString(1)+"'";
                     modifArticles.executeUpdate(requete);
                 }
                 
             }
             this.viderTextFieldsCommande();
+            this.RemplirListeCommandesHist();
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1162,7 +1147,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         int row = jTableCommandesHist.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
         
         if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
-            System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
+            //System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
             int idCommande = (int) jTableCommandesHist.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
             this.ID_Select_Commande_Historique = idCommande;
             System.out.println("L'ID de la commande selectionne est "+idCommande);
@@ -1178,7 +1163,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             Statement myStatement = this.connection.createStatement();
             ResultSet infosCommande = myStatement.executeQuery(requete);
             infosCommande.next();
-            System.out.println(infosCommande.getString(4));
+            // System.out.println(infosCommande.getString(4));
             
             jLabelHistoriquePrixTotal.setText(infosCommande.getString(4)+" €");
             String idClient = infosCommande.getString(3);
@@ -1256,7 +1241,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             
             genreArticle.next();
             
-            System.out.println(genreArticle.getString(1));
+            // System.out.println(genreArticle.getString(1));
             
             jTextFieldLibelleArticle.setText(libelle);
             jTextFieldStockArticle.setText(stock);
@@ -1282,7 +1267,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             ResultSet infosCommande = myStatement.executeQuery(requete);
             ResultSet article;
             infosCommande.next();
-            System.out.println(infosCommande.getString(4));
+            // System.out.println(infosCommande.getString(4));
             
             jLabelPrixCommande.setText(infosCommande.getString(4)+" €");
             jTextFieldIdClient.setText(infosCommande.getString(3));
@@ -1306,8 +1291,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 if (infosCommande.getInt(3)>article.getInt(7)){
                     okValider = false;
                     System.out.println("Pas assez d'article dispo pour l'article "+infosCommande.getString(3));
-                }
-                
+                } 
                 ligne[0] = infosCommande.getString(6); // Libellé article
                 ligne[1] = infosCommande.getString(3); // Nombre d'articles
                 ligne[2] = infosCommande.getString(9); // Prix individuel
@@ -1315,11 +1299,12 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 monTableau.addRow(ligne);
             } 
             
-            System.out.println("COUCOU TOUT LE MONDE !"+okValider);
             jTableContenuCommande.setModel(monTableau);
+            /* Affichage articles commande
             while (infosCommande.next()){
                 System.out.println(infosCommande.getString(6));
             }
+            */
             
             jButtonValiderCommande.setEnabled(okValider);
             jButtonRefuserCommande.setEnabled(true);
@@ -1347,7 +1332,6 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 ligne[2] = articles.getObject(7);
                 monTableau.addRow(ligne);
             }
-            System.out.println("Coucou articles");
             jTableArticles.setModel(monTableau);
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
@@ -1366,11 +1350,9 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
             Statement myStatementClient = this.connection.createStatement(); 
             Statement myStatementCommande = this.connection.createStatement(); 
-            Statement myStatementArticles = this.connection.createStatement();
             ResultSet commande = myStatementCommande.executeQuery(requete); // On récupère tous les clients dans le resultset
             ResultSet client;
             Object[] ligne = new Object[nbColonnes]; 
-            System.out.println("Yo");
             while (commande.next()){
                 ligne[0] = commande.getObject(1);
                 ligne[1] = commande.getObject(2); 
@@ -1381,7 +1363,6 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 ligne[2] = nomClient;
                 monTableau.addRow(ligne);
             }
-            System.out.println("Coucou commandes");
             jTableCommandes.setModel(monTableau);
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
@@ -1399,16 +1380,16 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             Statement myStatementArticle = this.connection.createStatement(); 
             ResultSet articles = myStatementArticle.executeQuery(requete); // On récupère tous les clients dans le resultset
             Object[] ligne = new Object[nbColonnes];
-            System.out.println("Yo");
             while (articles.next()){
                 ligne[0] = articles.getObject(1);
                 ligne[1] = articles.getObject(2);
                 
                 monTableau.addRow(ligne);
-                System.out.println("Yo 4 ?!");
             }
-            System.out.println("Coucou commandes");
             jTableCommandesHist.setModel(monTableau);
+            jLabelClientHistorique.setText("");
+            jLabelHistoriquePrixTotal.setText("");
+            jTextAreaHistoriqueArticles.setText("");
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1431,7 +1412,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             while (clients.next()){
                 for (int j = 0; j < nbColonnes; j++){
                     ligne[j] = clients.getObject(j+1);
-                    System.out.println(clients.getString(j+1));
+                    //System.out.println(clients.getString(j+1));
                 }
                 monTableau.addRow(ligne);
             }
