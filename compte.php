@@ -7,11 +7,10 @@ session_start();
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <link href="./css/nav_bar.css" rel="stylesheet">
-        <link href="./css/index.css" rel="stylesheet">
+        <link href="./css/compte.css" rel="stylesheet">
 
     </head>
     <body>
-       
         <div id="header">
             <div class="logo">
                 <img class="logoLSC" src="./images/lesupercoin_carré.png" href="#"></img>
@@ -24,10 +23,10 @@ session_start();
                     <a href="Index.php">Accueil</a>
                 </li>
                 <li class="dropdown">
-                    <a href="boutique.php">Boutique</a>    
-                </li> 
+                    <a href="boutique.php">Boutique</a>        
+                </li>
                 <li class="dropdown">
-                    <a href="compte.php">Compte</a>
+                    <a href="">Compte</a>
                     <ul>
                         <li><a href="#">Informations</a></li>
                         <li><a href="#">Paramètres</a></li>
@@ -41,26 +40,20 @@ session_start();
                 </ul>
             </nav>
         </div>
-        
     </body>
     
 </html>
 
-<script>
-    $('#header').prepend('<div id="menu-icon"><span class="first"></span><span class="second"></span><span class="third"></span></div>');
-	
-    $("#menu-icon").on("click", function(){
-        $("nav").slideToggle();
-        $(this).toggleClass("active");
-    });
-</script>
 
-<html>
-<div class="bg-image"></div>
+<?php
 
-<div class="bg-text">
-  <h1>BIENVENUE SUR LE SUPER COIN</h1>
-  <p>VOTRE SITE DE VENTE PAR CORRESPONDANCE PRÉFÉRÉ</p>
-</div>
-
-</html>
+if(isset($_SESSION['nom_utilisateur'])) {
+    echo '<div class="contenu_a_centrer">';
+    echo '<form action="deconnexion.php" method="post" class="form_compte">';
+    echo '<input type="submit" name="deconnexion" value="Déconnexion" class="btnDeconnexion">';
+    echo '</form>';
+    echo '</div>';
+} else {
+    header("Location: connexion.php");
+}
+?>

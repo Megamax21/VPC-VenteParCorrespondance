@@ -6,6 +6,8 @@ body {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
+    background: rgb(0,0,0);
+    background: radial-gradient(circle, rgba(0,0,0,0.8477766106442577) 39%, rgba(6,166,139,1) 100%);
 }
 .sidebar {
     flex-basis: 20%;
@@ -15,6 +17,10 @@ body {
 .content {
     flex-basis: 60%;
     padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-around; */
+    justify-content: space-between; 
 }
 .cart {
     flex-basis: 20%;
@@ -28,4 +34,142 @@ body {
 /* Styles CSS pour les filtres */
 .filter {
     margin-bottom: 20px;
+}
+
+.article {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 200px; /* Largeur du div carré */
+    height: 250px; /* Hauteur du div carré */
+    align-items: center;
+    text-align: center;
+    font-size: 70%;
+    background-color: #60b8a173;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 2px 8px 0#7ed6bf; /*2c554a*/
+}
+
+.titreArticle{
+    font-size: 100%;
+}
+
+.article img {
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 10px;
+}
+
+.imgArticle{
+    width: 100px;
+    height: 100px;
+}
+
+#articles{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.nombreArticle{
+    height: 20px;
+    width: 50px;
+}
+
+.ajoutPanierBouton{
+    padding: 0px;
+    margin-top: 10px;
+    height: 30px;
+    width: 120px;
+    box-shadow: 0 5px #89a098;
+    border-radius: 10px;
+    border: 0px;
+
+}
+
+    .ajoutPanierBouton:hover{
+        background-color: #7ceed1;  
+        box-shadow: 0 5px #417462;
+    }
+
+    .ajoutPanierBouton:active{
+        background-color: #7ceed1;
+        box-shadow: 0 3px #417462;
+        transform: translateY(4px);
+    }
+
+
+.btnValiderFiltre{
+    margin-top: 10px;
+    height: 40px;
+    width: 100px;
+    background-color: #218053;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 7px #045339;
+}  
+
+    .btnValiderFiltre:hover{
+        background-color: #06d39c;  
+    }
+
+    .btnValiderFiltre:active{
+        background-color: #06d39c;
+        box-shadow: 0 3px #045339;
+        transform: translateY(4px);
+    }
+
+.btnPasserCommande{
+    margin-top: 10px;
+    height: 30px;
+    width: 200px;
+    background-color: #218053;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 7px #045339;
+}
+    .btnPasserCommande:hover{
+        background-color: #06d39c;  
+    }
+
+    .btnPasserCommande:active{
+        background-color: #06d39c;
+        box-shadow: 0 3px #045339;
+        transform: translateY(4px);
+    }
+
+.btnViderPanier{
+    margin-top: 10px;
+    height: 30px;
+    width: 200px;
+    background-color: #ce7c02;
+    font-family: "Poppins", sans-serif;
+    color: #fff;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0 7px #614002;
+}
+
+.btnViderPanier:hover{
+    background-color: rgb(224, 162, 46);  
+}
+
+.btnViderPanier:active{
+    background-color: rgb(224, 162, 46);
+    box-shadow: 0 3px #614002;
+    transform: translateY(4px);
 }
