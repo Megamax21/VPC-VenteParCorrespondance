@@ -4,6 +4,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +38,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         String user = "VPC";
         String password = "SsznuHD19q51!dNS";
         */
-        /* A décommenter si je suis hors des cours ! ! !*/  
+        /* A décommenter si je suis hors des cours ! ! ! */ 
         String url = "jdbc:mysql://localhost/vpc";
         String user = "root";
         String password = "";
@@ -74,6 +75,24 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButtonRefuserRefusCommande = new javax.swing.JButton();
         jButtonValiderRefusCommande = new javax.swing.JButton();
+        jDialogCreationArticle = new javax.swing.JDialog();
+        jLabel20 = new javax.swing.JLabel();
+        jTextFieldLibelleCreationArticle = new javax.swing.JTextField();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jComboBoxGenreCreationArticle = new javax.swing.JComboBox<>();
+        jTextFieldReferenceCreationArticle = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        jTextFieldPrixCreationArticle = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jComboBoxTypeCreationArticle = new javax.swing.JComboBox<>();
+        jTextFieldStockCreationArticle = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jButtonRefusCreationArticle = new javax.swing.JButton();
+        jButtonCreerCreationArticle = new javax.swing.JButton();
+        jTextFieldSeuilCreationArticle = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
         jTabbedPaneFenetre = new javax.swing.JTabbedPane();
         jPanelClients = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -109,9 +128,12 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jTextFieldRefArticle = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabelGenreArticle = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldSeuilArticle = new javax.swing.JTextField();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableArticles = new javax.swing.JTable();
         jButtonRafraichirArticles = new javax.swing.JButton();
+        jButtonCreationArticle = new javax.swing.JButton();
         jPanelCommandes = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jPanelModifClient2 = new javax.swing.JPanel();
@@ -145,13 +167,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jTextAreaHistoriqueArticles = new javax.swing.JTextArea();
         jPanelConnexion = new javax.swing.JPanel();
         jTextFieldConnectName = new javax.swing.JTextField();
-        jTextFieldConnectPWord = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButtonConnexion = new javax.swing.JButton();
+        jLabelConnectionEchouee = new javax.swing.JLabel();
+        jTextFieldPWord = new javax.swing.JPasswordField();
 
         jDialogRefusCommande.setMinimumSize(new java.awt.Dimension(340, 175));
-        jDialogRefusCommande.setPreferredSize(new java.awt.Dimension(325, 155));
 
         jLabel7.setFont(new java.awt.Font("Amiri Quran", 1, 24)); // NOI18N
         jLabel7.setText("<html>\n<p style=\"font-family:'Comic Sans MS'\">Etes vous sur de vouloir <br/>\nrefuser cette commande ?</p>\n</html>");
@@ -195,6 +217,120 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addComponent(jButtonValiderRefusCommande, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonRefuserRefusCommande, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
+        );
+
+        jDialogCreationArticle.setMinimumSize(new java.awt.Dimension(514, 444));
+
+        jLabel20.setText("Création d'un nouvel article");
+
+        jLabel25.setText("Libellé");
+
+        jLabel26.setText("Genre");
+
+        jLabel28.setText("Référence");
+
+        jLabel29.setText("Prix");
+
+        jLabel30.setText("Type");
+
+        jLabel32.setText("Stock");
+
+        jButtonRefusCreationArticle.setText("Annuler");
+        jButtonRefusCreationArticle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefusCreationArticleActionPerformed(evt);
+            }
+        });
+
+        jButtonCreerCreationArticle.setText("Créer");
+        jButtonCreerCreationArticle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreerCreationArticleActionPerformed(evt);
+            }
+        });
+
+        jTextFieldSeuilCreationArticle.setText("10");
+
+        jLabel27.setText("Seuil ");
+
+        javax.swing.GroupLayout jDialogCreationArticleLayout = new javax.swing.GroupLayout(jDialogCreationArticle.getContentPane());
+        jDialogCreationArticle.getContentPane().setLayout(jDialogCreationArticleLayout);
+        jDialogCreationArticleLayout.setHorizontalGroup(
+            jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogCreationArticleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldLibelleCreationArticle)
+                    .addGroup(jDialogCreationArticleLayout.createSequentialGroup()
+                        .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jDialogCreationArticleLayout.createSequentialGroup()
+                        .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jTextFieldPrixCreationArticle, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jComboBoxGenreCreationArticle, javax.swing.GroupLayout.Alignment.LEADING, 0, 109, Short.MAX_VALUE)
+                                .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldReferenceCreationArticle)
+                            .addGroup(jDialogCreationArticleLayout.createSequentialGroup()
+                                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel28)
+                                    .addComponent(jComboBoxTypeCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldStockCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldSeuilCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialogCreationArticleLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jButtonCreerCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(jButtonRefusCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
+        );
+        jDialogCreationArticleLayout.setVerticalGroup(
+            jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogCreationArticleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldLibelleCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxGenreCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldReferenceCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel29)
+                    .addComponent(jLabel30)
+                    .addComponent(jLabel32)
+                    .addComponent(jLabel27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldPrixCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxTypeCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldStockCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldSeuilCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRefusCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonCreerCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -383,6 +519,14 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
         jLabel6.setText("Genre :");
 
+        jLabel2.setText("Seuil :");
+
+        jTextFieldSeuilArticle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSeuilArticleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelModifClient1Layout = new javax.swing.GroupLayout(jPanelModifClient1);
         jPanelModifClient1.setLayout(jPanelModifClient1Layout);
         jPanelModifClient1Layout.setHorizontalGroup(
@@ -390,30 +534,40 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             .addGroup(jPanelModifClient1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldRefArticle)
-                    .addGroup(jPanelModifClient1Layout.createSequentialGroup()
-                        .addComponent(jButtonModifierArticle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSupprimerArticle))
                     .addGroup(jPanelModifClient1Layout.createSequentialGroup()
                         .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldRefArticle)
                             .addGroup(jPanelModifClient1Layout.createSequentialGroup()
-                                .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldLibelleArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel16))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jTextFieldStockArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButtonModifierArticle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonSupprimerArticle))
+                            .addComponent(jTextFieldPrixArticle))
+                        .addContainerGap())
+                    .addGroup(jPanelModifClient1Layout.createSequentialGroup()
+                        .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel19)
                             .addGroup(jPanelModifClient1Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelGenreArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextFieldPrixArticle))
-                .addContainerGap())
+                        .addGap(28, 28, 28))
+                    .addGroup(jPanelModifClient1Layout.createSequentialGroup()
+                        .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldLibelleArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jTextFieldStockArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelModifClient1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 28, Short.MAX_VALUE))
+                            .addGroup(jPanelModifClient1Layout.createSequentialGroup()
+                                .addComponent(jTextFieldSeuilArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                .addContainerGap())))))
         );
         jPanelModifClient1Layout.setVerticalGroup(
             jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,11 +575,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel17))
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldLibelleArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldStockArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldStockArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldSeuilArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelModifClient1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -473,6 +629,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             }
         });
 
+        jButtonCreationArticle.setText("Création");
+        jButtonCreationArticle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreationArticleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelArticlesLayout = new javax.swing.GroupLayout(jPanelArticles);
         jPanelArticles.setLayout(jPanelArticlesLayout);
         jPanelArticlesLayout.setHorizontalGroup(
@@ -484,13 +647,15 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelArticlesLayout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jButtonRafraichirArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(91, Short.MAX_VALUE))
-                    .addGroup(jPanelArticlesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanelModifClient1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanelArticlesLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonRafraichirArticles, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                            .addComponent(jButtonCreationArticle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelArticlesLayout.setVerticalGroup(
             jPanelArticlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -504,13 +669,15 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addGroup(jPanelArticlesLayout.createSequentialGroup()
                         .addComponent(jPanelModifClient1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRafraichirArticles)))
+                        .addComponent(jButtonRafraichirArticles)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButtonCreationArticle)))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPaneFenetre.addTab("Articles", jPanelArticles);
 
-        jLabel21.setText("Visualisation et modification des articles");
+        jLabel21.setText("Visualisation et modification des commandes");
 
         jPanelModifClient2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -522,7 +689,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             }
         });
 
-        jLabel22.setText("Id Client :");
+        jLabel22.setText("Id commande :");
 
         jLabel23.setText("Date commande :");
 
@@ -643,7 +810,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addGroup(jPanelCommandesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelCommandesLayout.createSequentialGroup()
                         .addComponent(jLabel21)
-                        .addGap(0, 35, Short.MAX_VALUE))
+                        .addGap(0, 5, Short.MAX_VALUE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelModifClient2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -801,7 +968,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
         jTabbedPaneFenetre.addTab("Historique", jPanelHistorique);
 
-        jPanelConnexion.setBackground(new java.awt.Color(0, 161, 112));
+        jTextFieldConnectName.setText("root");
 
         jLabel3.setText("Identifiant");
 
@@ -815,23 +982,26 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             }
         });
 
+        jLabelConnectionEchouee.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout jPanelConnexionLayout = new javax.swing.GroupLayout(jPanelConnexion);
         jPanelConnexion.setLayout(jPanelConnexionLayout);
         jPanelConnexionLayout.setHorizontalGroup(
             jPanelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConnexionLayout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(115, 115, 115)
                 .addGroup(jPanelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButtonConnexion)
                     .addGroup(jPanelConnexionLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(12, 12, 12)
-                        .addComponent(jTextFieldConnectName))
+                        .addComponent(jTextFieldConnectName, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                    .addComponent(jLabelConnectionEchouee, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelConnexionLayout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(12, 12, 12)
-                        .addComponent(jTextFieldConnectPWord, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(154, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldPWord)))
+                .addGap(133, 133, 133))
         );
         jPanelConnexionLayout.setVerticalGroup(
             jPanelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -842,11 +1012,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelConnexionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldConnectPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldPWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(jButtonConnexion)
-                .addContainerGap(165, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelConnectionEchouee, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -929,8 +1101,16 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     
     private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
         // TODO add your handling code here:
-        jPanelConnexion.setVisible(false);
-        jTabbedPaneFenetre.setVisible(true);
+        String username = jTextFieldConnectName.getText();
+        String password = Arrays.toString(jTextFieldPWord.getPassword());
+        
+        System.out.println(password);
+        if ("root".equals(username)){
+            jPanelConnexion.setVisible(false);
+            jTabbedPaneFenetre.setVisible(true);
+        } else {
+            jLabelConnectionEchouee.setText("Mauvais identifiants !");
+        }                    
     }//GEN-LAST:event_jButtonConnexionActionPerformed
     
     private void ModificationClient(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificationClient
@@ -1006,7 +1186,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     stockArticle = mesArticles.getInt(7);
                     // System.out.println("ID = "+idArticle+" | Plus grande occurance = "+occuranceMin+" | Commande = "+idCommande+" | Stock : "+stockArticle);
                     if (occuranceMin > stockArticle ){
-                        System.out.println("Pas assez d'articles "+idArticle+" : min = "+occuranceMin+ " | stock = "+stockArticle);
+                        //System.out.println("Pas assez d'articles "+idArticle+" : min = "+occuranceMin+ " | stock = "+stockArticle);
                         requeteUpdate = "UPDATE `t_article` SET `alerte`=1 WHERE `Id_Article`="+idArticle;
                     } else {
                         requeteUpdate = "UPDATE `t_article` SET `alerte`=0 WHERE `Id_Article`="+idArticle;
@@ -1037,12 +1217,25 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         // AFFICHAGE ARTICLES
         int row = jTableArticles.rowAtPoint(evt.getPoint()); // On récupère la ligne dans laquelle est la souris au clic
         
-        if (row >= 0) { // Pour être sûr qu'on a bien sélectionné une ligne du tableau 
+        if (row >= 0) { try {
+            // Pour être sûr qu'on a bien sélectionné une ligne du tableau
             //System.out.println("Coucou je suis a la ligne "+Integer.toString(row));
-            int idArticle = (int) jTableArticles.getValueAt(row, 0);//Integer.parseInt(jTableClients.getValueAt(row, 0).toString());
+            String requete;
+            Statement statement = this.connection.createStatement();
+            ResultSet res;
+            System.out.println("On dit coucou à la ref "+jTableArticles.getValueAt(row, 0));
+            requete = "SELECT `Id_Article` FROM `t_article` WHERE `reference` = '"+jTableArticles.getValueAt(row, 0)+"'";
+            res = statement.executeQuery(requete);
+            int idArticle = 0;
+            while (res.next()){
+                idArticle =res.getInt(1);
+            }
             this.ID_Select_Article = idArticle;
             System.out.println("L'ID de l'article selectionne est "+idArticle);
             this.RemplirFicheArticle(idArticle);
+            } catch (SQLException ex) {
+                Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_clickArticle
 
@@ -1183,6 +1376,80 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         this.RecuperationAlertes();
         RemplirListeAlertes();
     }//GEN-LAST:event_jButtonRafraichirAlertesActionPerformed
+
+    private void jTextFieldSeuilArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSeuilArticleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSeuilArticleActionPerformed
+
+    private void jButtonRefusCreationArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefusCreationArticleActionPerformed
+        // TODO add your handling code here:
+        this.jDialogCreationArticle.setVisible(false);
+    }//GEN-LAST:event_jButtonRefusCreationArticleActionPerformed
+
+    private void jButtonCreationArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreationArticleActionPerformed
+        try {
+            // TODO add your handling code here:
+            Statement statement = this.connection.createStatement();
+            ResultSet res;
+            String requete;
+            this.jDialogCreationArticle.setVisible(true);
+            
+            
+            // REMPLISSAGE COMBOBOXES :
+            // Combo Genre
+            jComboBoxGenreCreationArticle.removeAll();
+            requete = "SELECT * FROM `t_genre`";
+            res = statement.executeQuery(requete);
+            
+            while (res.next()){
+                jComboBoxGenreCreationArticle.addItem(res.getString(2));
+            }
+            
+            // Combo Type
+            jComboBoxTypeCreationArticle.removeAll();
+            requete = "SELECT * FROM `t_types_vetements`";
+            res = statement.executeQuery(requete);
+            
+            while (res.next()){
+                jComboBoxTypeCreationArticle.addItem(res.getString(2));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jButtonCreationArticleActionPerformed
+
+    private void jButtonCreerCreationArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreerCreationArticleActionPerformed
+        try {
+            // TODO add your handling code here:
+            Statement stmt = this.connection.createStatement();
+            String requete;
+            
+            System.out.println("/!\\ LE RESPONSABLE CREE UN NOUVEL ARTICLE /!\\");
+            
+            // Petite vérification des infos entrées
+            String libelle = this.jTextFieldLibelleCreationArticle.getText();
+            String genre = this.jComboBoxGenreCreationArticle.getSelectedItem().toString();
+            String ref = this.jTextFieldReferenceCreationArticle.getText();
+            String prix = this.jTextFieldPrixCreationArticle.getText();
+            String type = this.jComboBoxTypeCreationArticle.getSelectedItem().toString();
+            String stock = this.jTextFieldStockCreationArticle.getText();
+            
+            System.out.println("Le libelle de l'article est "+libelle);
+            System.out.println("Le genre de l'article est "+genre);
+            System.out.println("La ref de l'article est "+ref);
+            System.out.println("Le prix de l'article est de "+prix);
+            System.out.println("Le type de l'article est "+type);
+            System.out.println("Il reste "+stock+" articles en stock");
+            
+            // On rajoute l'article !
+            requete = "";
+            stmt.executeUpdate(requete);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonCreerCreationArticleActionPerformed
     
     public void RemplirFicheCommandeHistorique(int idCommande){
         try {
@@ -1375,14 +1642,14 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             int nbColonnes = 3;
             DefaultTableModel monTableau = new DefaultTableModel(); // Création du contenu du tableau
             String requete = "SELECT * FROM `t_article` WHERE 1"; // Récupération des données
-            String[] entete = {"ID","Libellé","Stock"};
+            String[] entete = {"Référence","Libellé","Stock"};
             monTableau.setColumnIdentifiers(entete); // On affecte l'entête au tableau
             Statement myStatement = this.connection.createStatement(); 
             ResultSet articles = myStatement.executeQuery(requete); // On récupère tous les clients dans le resultset
             Object[] ligne = new Object[nbColonnes]; 
             
             while (articles.next()){
-                ligne[0] = articles.getObject(1);
+                ligne[0] = articles.getObject(4);
                 ligne[1] = articles.getObject(2);
                 ligne[2] = articles.getObject(7);
                 monTableau.addRow(ligne);
@@ -1516,6 +1783,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConnexion;
+    private javax.swing.JButton jButtonCreationArticle;
+    private javax.swing.JButton jButtonCreerCreationArticle;
     private javax.swing.JButton jButtonModifierArticle;
     private javax.swing.JButton jButtonModifierClient;
     private javax.swing.JButton jButtonRafraichirAlertes;
@@ -1523,12 +1792,16 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRafraichirClients;
     private javax.swing.JButton jButtonRafraichirCommandes;
     private javax.swing.JButton jButtonRafraichirHistorique;
+    private javax.swing.JButton jButtonRefusCreationArticle;
     private javax.swing.JButton jButtonRefuserCommande;
     private javax.swing.JButton jButtonRefuserRefusCommande;
     private javax.swing.JButton jButtonSupprimerArticle;
     private javax.swing.JButton jButtonSupprimerClient;
     private javax.swing.JButton jButtonValiderCommande;
     private javax.swing.JButton jButtonValiderRefusCommande;
+    private javax.swing.JComboBox<String> jComboBoxGenreCreationArticle;
+    private javax.swing.JComboBox<String> jComboBoxTypeCreationArticle;
+    private javax.swing.JDialog jDialogCreationArticle;
     private javax.swing.JDialog jDialogRefusCommande;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1541,11 +1814,20 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1553,6 +1835,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelClientHistorique;
+    private javax.swing.JLabel jLabelConnectionEchouee;
     private javax.swing.JLabel jLabelGenreArticle;
     private javax.swing.JLabel jLabelHistoriquePrixTotal;
     private javax.swing.JLabel jLabelPrixCommande;
@@ -1583,16 +1866,22 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextAreaAdresse;
     private javax.swing.JTextArea jTextAreaHistoriqueArticles;
     private javax.swing.JTextField jTextFieldConnectName;
-    private javax.swing.JTextField jTextFieldConnectPWord;
     private javax.swing.JTextField jTextFieldDateCommande;
     private javax.swing.JTextField jTextFieldIdClient;
     private javax.swing.JTextField jTextFieldLibelleArticle;
+    private javax.swing.JTextField jTextFieldLibelleCreationArticle;
     private javax.swing.JTextField jTextFieldMailClient;
     private javax.swing.JTextField jTextFieldNomClient;
     private javax.swing.JTextField jTextFieldNumClient;
+    private javax.swing.JPasswordField jTextFieldPWord;
     private javax.swing.JTextField jTextFieldPrenomClient;
     private javax.swing.JTextField jTextFieldPrixArticle;
+    private javax.swing.JTextField jTextFieldPrixCreationArticle;
     private javax.swing.JTextField jTextFieldRefArticle;
+    private javax.swing.JTextField jTextFieldReferenceCreationArticle;
+    private javax.swing.JTextField jTextFieldSeuilArticle;
+    private javax.swing.JTextField jTextFieldSeuilCreationArticle;
     private javax.swing.JTextField jTextFieldStockArticle;
+    private javax.swing.JTextField jTextFieldStockCreationArticle;
     // End of variables declaration//GEN-END:variables
 }
