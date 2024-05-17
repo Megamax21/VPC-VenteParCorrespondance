@@ -93,6 +93,12 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jButtonCreerCreationArticle = new javax.swing.JButton();
         jTextFieldSeuilCreationArticle = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
+        jDialogAjoutClient = new javax.swing.JDialog();
+        jLabel31 = new javax.swing.JLabel();
+        jTextFieldNomCreationClient = new javax.swing.JTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jTextFieldPrenomCreationClient = new javax.swing.JTextField();
         jTabbedPaneFenetre = new javax.swing.JTabbedPane();
         jPanelClients = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -281,11 +287,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel28)
                                     .addComponent(jComboBoxTypeCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldStockCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
+                                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldStockCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jDialogCreationArticleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldSeuilCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -331,6 +337,47 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addComponent(jButtonRefusCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonCreerCreationArticle, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
+        );
+
+        jLabel31.setText("Création d'un client");
+
+        jLabel33.setText("Nom");
+
+        jLabel34.setText("Prenom");
+
+        javax.swing.GroupLayout jDialogAjoutClientLayout = new javax.swing.GroupLayout(jDialogAjoutClient.getContentPane());
+        jDialogAjoutClient.getContentPane().setLayout(jDialogAjoutClientLayout);
+        jDialogAjoutClientLayout.setHorizontalGroup(
+            jDialogAjoutClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogAjoutClientLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialogAjoutClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNomCreationClient))
+                .addGroup(jDialogAjoutClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialogAjoutClientLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDialogAjoutClientLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldPrenomCreationClient, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(178, Short.MAX_VALUE))
+        );
+        jDialogAjoutClientLayout.setVerticalGroup(
+            jDialogAjoutClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogAjoutClientLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialogAjoutClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel33)
+                    .addComponent(jLabel34))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jDialogAjoutClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNomCreationClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPrenomCreationClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1102,10 +1149,10 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
         // TODO add your handling code here:
         String username = jTextFieldConnectName.getText();
-        String password = Arrays.toString(jTextFieldPWord.getPassword());
+        String password = new String(jTextFieldPWord.getPassword());
         
         System.out.println(password);
-        if ("root".equals(username)){
+        if ("root".equals(username) && "123456".equals(password)){
             jPanelConnexion.setVisible(false);
             jTabbedPaneFenetre.setVisible(true);
         } else {
@@ -1424,7 +1471,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             // TODO add your handling code here:
             Statement stmt = this.connection.createStatement();
             String requete;
-            
+            ResultSet res;
             System.out.println("/!\\ LE RESPONSABLE CREE UN NOUVEL ARTICLE /!\\");
             
             // Petite vérification des infos entrées
@@ -1442,8 +1489,20 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             System.out.println("Le type de l'article est "+type);
             System.out.println("Il reste "+stock+" articles en stock");
             
+            requete = "SELECT * FROM `t_genre` WHERE libelle_Genre = '"+genre+"'";
+            res = stmt.executeQuery(requete);
+            res.next();
+            genre = res.getString(1);
+            System.out.println("On recupere l'id du genre : "+genre);
+            
+            requete = "SELECT * FROM `t_types_vetements` WHERE libelle_type = '"+type+"'";
+            res = stmt.executeQuery(requete);
+            res.next();
+            type = res.getString(1);
+            System.out.println("On recupere l'id du type : "+type);
+            
             // On rajoute l'article !
-            requete = "";
+            requete = "INSERT INTO `t_article`(`libelle`, `genre`, `reference`, `prix`, `type`, `stock`, `alerte`, `seuil`) VALUES ('"+libelle+"','"+genre+"','"+ref+"','"+prix+"','"+type+"','"+stock+"','0','16')";
             stmt.executeUpdate(requete);
             
         } catch (SQLException ex) {
@@ -1801,6 +1860,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JButton jButtonValiderRefusCommande;
     private javax.swing.JComboBox<String> jComboBoxGenreCreationArticle;
     private javax.swing.JComboBox<String> jComboBoxTypeCreationArticle;
+    private javax.swing.JDialog jDialogAjoutClient;
     private javax.swing.JDialog jDialogCreationArticle;
     private javax.swing.JDialog jDialogRefusCommande;
     private javax.swing.JLabel jLabel1;
@@ -1827,7 +1887,10 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1872,9 +1935,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldLibelleCreationArticle;
     private javax.swing.JTextField jTextFieldMailClient;
     private javax.swing.JTextField jTextFieldNomClient;
+    private javax.swing.JTextField jTextFieldNomCreationClient;
     private javax.swing.JTextField jTextFieldNumClient;
     private javax.swing.JPasswordField jTextFieldPWord;
     private javax.swing.JTextField jTextFieldPrenomClient;
+    private javax.swing.JTextField jTextFieldPrenomCreationClient;
     private javax.swing.JTextField jTextFieldPrixArticle;
     private javax.swing.JTextField jTextFieldPrixCreationArticle;
     private javax.swing.JTextField jTextFieldRefArticle;
