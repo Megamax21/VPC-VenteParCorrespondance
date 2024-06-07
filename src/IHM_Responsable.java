@@ -4,21 +4,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author lhote
- */
 public final class IHM_Responsable extends javax.swing.JFrame {
 
     /**
@@ -29,6 +17,13 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     public int ID_Select_Article=0;
     public int ID_Select_Commande=0;
     public int ID_Select_Commande_Historique=0;
+    public int ID_Responsable = 0;
+    public String userName;
+    
+    public boolean showOldPassword = false;
+    public boolean showNewPassword = false;
+    public boolean showConfirmPassword = false;
+    
     public IHM_Responsable() {
         initComponents();
         jTabbedPaneFenetre.setVisible(false);
@@ -54,6 +49,10 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             this.RemplirListeArticles();
             this.RemplirListeCommandes();
             this.RemplirListeCommandesHist();
+            
+            this.jMenuBar1.setVisible(false);
+            this.jPanelModifProfil.setVisible(false);
+            
             
             this.RecuperationAlertes();
             this.RemplirListeAlertes();
@@ -113,9 +112,18 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jTextFieldMailClient = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jTextFieldNumClient = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaAdresse = new javax.swing.JTextArea();
+        jTextFieldNumeroRueClient = new javax.swing.JTextField();
+        jLabel35 = new javax.swing.JLabel();
+        jTextFieldNomDeRueClient = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        jTextFieldCodePostalClient = new javax.swing.JTextField();
+        jLabel37 = new javax.swing.JLabel();
+        jTextFieldVilleClient = new javax.swing.JTextField();
+        jLabel38 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaComplementAdresse = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableClients = new javax.swing.JTable();
         jButtonRafraichirClients = new javax.swing.JButton();
@@ -171,6 +179,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jLabelClientHistorique = new javax.swing.JLabel();
         jScrollPaneHistoriqueArticles = new javax.swing.JScrollPane();
         jTextAreaHistoriqueArticles = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jPanelConnexion = new javax.swing.JPanel();
         jTextFieldConnectName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -178,6 +187,23 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jButtonConnexion = new javax.swing.JButton();
         jLabelConnectionEchouee = new javax.swing.JLabel();
         jTextFieldPWord = new javax.swing.JPasswordField();
+        jPanelModifProfil = new javax.swing.JPanel();
+        jLabelBonjourResponsable = new javax.swing.JLabel();
+        jPasswordFieldNewPassword = new javax.swing.JPasswordField();
+        jPasswordFieldOldPassword = new javax.swing.JPasswordField();
+        jPasswordFieldConfirmPassword = new javax.swing.JPasswordField();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel41 = new javax.swing.JLabel();
+        jButtonShowAncien = new javax.swing.JButton();
+        jButtonShowNouveau = new javax.swing.JButton();
+        jButtonShowConfirmer = new javax.swing.JButton();
+        jButtonChangerMDP = new javax.swing.JButton();
+        jLabelChangementDeMDP = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuInterface = new javax.swing.JMenu();
+        jMenuItemInterface = new javax.swing.JMenuItem();
+        jMenuItemProfil = new javax.swing.JMenuItem();
 
         jDialogRefusCommande.setMinimumSize(new java.awt.Dimension(340, 175));
 
@@ -412,11 +438,80 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
         jLabel13.setText("Numéro de téléphone :");
 
-        jLabel14.setText("Adresse :");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Adresse"));
 
-        jTextAreaAdresse.setColumns(20);
-        jTextAreaAdresse.setRows(5);
-        jScrollPane2.setViewportView(jTextAreaAdresse);
+        jLabel14.setText("Numéro");
+
+        jLabel35.setText("Nom de rue");
+
+        jLabel36.setText("Code Postal");
+
+        jLabel37.setText("Ville");
+
+        jLabel38.setText("Complément d'adresse");
+
+        jTextAreaComplementAdresse.setColumns(20);
+        jTextAreaComplementAdresse.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaComplementAdresse);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNumeroRueClient, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTextFieldNomDeRueClient)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel36, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldCodePostalClient, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jTextFieldVilleClient)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel38)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNumeroRueClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNomDeRueClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldCodePostalClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldVilleClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanelModifClientLayout = new javax.swing.GroupLayout(jPanelModifClient);
         jPanelModifClient.setLayout(jPanelModifClientLayout);
@@ -429,26 +524,23 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                         .addComponent(jButtonModifierClient)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonSupprimerClient))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldMailClient)
+                    .addComponent(jTextFieldNumClient)
                     .addGroup(jPanelModifClientLayout.createSequentialGroup()
                         .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
+                            .addComponent(jTextFieldNomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldPrenomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)))
+                    .addGroup(jPanelModifClientLayout.createSequentialGroup()
+                        .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))
-                        .addGap(78, 78, 78))
-                    .addGroup(jPanelModifClientLayout.createSequentialGroup()
-                        .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldMailClient)
-                            .addComponent(jTextFieldNumClient)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-                            .addGroup(jPanelModifClientLayout.createSequentialGroup()
-                                .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldNomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldPrenomClient, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11))))
-                        .addContainerGap())))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanelModifClientLayout.setVerticalGroup(
             jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -470,14 +562,12 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldNumClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelModifClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonModifierClient)
                     .addComponent(jButtonSupprimerClient))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         jTableClients.setModel(new javax.swing.table.DefaultTableModel(
@@ -719,7 +809,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                         .addComponent(jButtonRafraichirArticles)
                         .addGap(37, 37, 37)
                         .addComponent(jButtonCreationArticle)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         jTabbedPaneFenetre.addTab("Articles", jPanelArticles);
@@ -879,7 +969,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRafraichirCommandes)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jTabbedPaneFenetre.addTab("Commandes", jPanelCommandes);
@@ -916,7 +1006,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                     .addGroup(jPanelAlertesLayout.createSequentialGroup()
                         .addGap(210, 210, 210)
                         .addComponent(jButtonRafraichirAlertes)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanelAlertesLayout.setVerticalGroup(
             jPanelAlertesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -925,7 +1015,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRafraichirAlertes)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         jTabbedPaneFenetre.addTab("Alertes", jPanelAlertes);
@@ -966,10 +1056,23 @@ public final class IHM_Responsable extends javax.swing.JFrame {
         jTextAreaHistoriqueArticles.setEnabled(false);
         jScrollPaneHistoriqueArticles.setViewportView(jTextAreaHistoriqueArticles);
 
+        jButton1.setText("Supprimer de l'historique");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supprimerCommandeHist(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelHistoriqueLayout = new javax.swing.GroupLayout(jPanelHistorique);
         jPanelHistorique.setLayout(jPanelHistoriqueLayout);
         jPanelHistoriqueLayout.setHorizontalGroup(
             jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(jButtonRafraichirHistorique)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -985,12 +1088,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                         .addComponent(jLabelHistoriquePrixTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
                         .addComponent(jScrollPaneHistoriqueArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 16, Short.MAX_VALUE)))
+                        .addGap(0, 11, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanelHistoriqueLayout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(jButtonRafraichirHistorique)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelHistoriqueLayout.setVerticalGroup(
             jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1008,14 +1107,21 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                             .addComponent(jLabelHistoriquePrixTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPaneHistoriqueArticles, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addComponent(jButtonRafraichirHistorique)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(jPanelHistoriqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRafraichirHistorique)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         jTabbedPaneFenetre.addTab("Historique", jPanelHistorique);
 
-        jTextFieldConnectName.setText("root");
+        jTextFieldConnectName.setText("Responsable");
+        jTextFieldConnectName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldConnectNameActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Identifiant");
 
@@ -1065,8 +1171,131 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addComponent(jButtonConnexion)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelConnectionEchouee, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
+
+        jLabel39.setText("Ancien mot de passe");
+
+        jLabel40.setText("Nouveau mot de passe");
+
+        jLabel41.setText("Confirmer le mot de passe");
+
+        jButtonShowAncien.setText("Afficher");
+        jButtonShowAncien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonShowAncienActionPerformed(evt);
+            }
+        });
+
+        jButtonShowNouveau.setText("Afficher");
+        jButtonShowNouveau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonShowNouveauActionPerformed(evt);
+            }
+        });
+
+        jButtonShowConfirmer.setText("Afficher");
+        jButtonShowConfirmer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonShowConfirmerActionPerformed(evt);
+            }
+        });
+
+        jButtonChangerMDP.setText("VALIDER");
+        jButtonChangerMDP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonChangerMDPActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelModifProfilLayout = new javax.swing.GroupLayout(jPanelModifProfil);
+        jPanelModifProfil.setLayout(jPanelModifProfilLayout);
+        jPanelModifProfilLayout.setHorizontalGroup(
+            jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelModifProfilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelBonjourResponsable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(120, 120, 120))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelModifProfilLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonChangerMDP, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(181, 181, 181))
+            .addGroup(jPanelModifProfilLayout.createSequentialGroup()
+                .addGroup(jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelModifProfilLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelChangementDeMDP, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelModifProfilLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel40, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel41, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPasswordFieldOldPassword)
+                            .addComponent(jPasswordFieldNewPassword)
+                            .addComponent(jPasswordFieldConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonShowAncien)
+                            .addComponent(jButtonShowNouveau)
+                            .addComponent(jButtonShowConfirmer))))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPanelModifProfilLayout.setVerticalGroup(
+            jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelModifProfilLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(jLabelBonjourResponsable, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordFieldOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel39)
+                    .addComponent(jButtonShowAncien))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordFieldNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel40)
+                    .addComponent(jButtonShowNouveau))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelModifProfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jPasswordFieldConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel41)
+                    .addComponent(jButtonShowConfirmer))
+                .addGap(49, 49, 49)
+                .addComponent(jButtonChangerMDP, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelChangementDeMDP, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jMenuInterface.setText("Actions");
+        jMenuInterface.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuInterfaceActionPerformed(evt);
+            }
+        });
+
+        jMenuItemInterface.setText("Interface");
+        jMenuItemInterface.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInterfaceActionPerformed(evt);
+            }
+        });
+        jMenuInterface.add(jMenuItemInterface);
+
+        jMenuItemProfil.setText("Profil");
+        jMenuItemProfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProfilActionPerformed(evt);
+            }
+        });
+        jMenuInterface.add(jMenuItemProfil);
+
+        jMenuBar1.add(jMenuInterface);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1077,12 +1306,22 @@ public final class IHM_Responsable extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addComponent(jPanelConnexion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 2, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanelModifProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPaneFenetre)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanelConnexion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanelModifProfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -1116,11 +1355,18 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     }
     
     public void viderTextFieldsClient() {
-        jTextAreaAdresse.setText("");
+       
         jTextFieldNomClient.setText("");
         jTextFieldPrenomClient.setText("");
         jTextFieldMailClient.setText("");
         jTextFieldNumClient.setText("");
+        
+        // Vider Adresse 
+        jTextFieldNumeroRueClient.setText("");
+        jTextFieldNomDeRueClient.setText("");
+        jTextFieldCodePostalClient.setText("");
+        jTextFieldVilleClient.setText("");
+        jTextAreaComplementAdresse.setText("");
         
         jButtonModifierClient.setEnabled(false);
         jButtonSupprimerClient.setEnabled(false);
@@ -1147,17 +1393,39 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     }
     
     private void jButtonConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConnexionActionPerformed
-        // TODO add your handling code here:
-        String username = jTextFieldConnectName.getText();
-        String password = new String(jTextFieldPWord.getPassword());
-        
-        System.out.println(password);
-        if ("root".equals(username) && "123456".equals(password)){
-            jPanelConnexion.setVisible(false);
-            jTabbedPaneFenetre.setVisible(true);
-        } else {
-            jLabelConnectionEchouee.setText("Mauvais identifiants !");
-        }                    
+        try {
+            // TODO add your handling code here:
+            
+            Statement myStatement = this.connection.createStatement();
+            String requete = "SELECT * FROM `t_responsable`";
+            boolean idOK = false;
+            ResultSet monResultat = myStatement.executeQuery(requete);
+            
+            String username = jTextFieldConnectName.getText();
+            String password = new String(jTextFieldPWord.getPassword());
+            
+            while (monResultat.next()){
+                System.out.println(monResultat.getString(2) + "    " + monResultat.getString(3));
+                if (monResultat.getString(2).equals(username) && monResultat.getString(3).equals(password)) {
+                    idOK = true;
+                    this.jMenuBar1.setVisible(true);
+                    this.userName = username;
+                    this.ID_Responsable = monResultat.getInt(1);
+                    String bonjour = "Bonjour à vous, "+this.userName+" souhaitez vous modifier votre mot de passe ?";
+                    this.jLabelBonjourResponsable.setText(bonjour);
+                }
+            }
+            
+            System.out.println(password);
+            if (idOK){
+                jPanelConnexion.setVisible(false);
+                jTabbedPaneFenetre.setVisible(true);
+            } else {
+                jLabelConnectionEchouee.setText("Mauvais identifiants !");                    
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonConnexionActionPerformed
     
     private void ModificationClient(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificationClient
@@ -1168,11 +1436,14 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             // On récupère les valeurs des TextFields :
             String nomClientMod = jTextFieldNomClient.getText();
             String prenomClientMod = jTextFieldPrenomClient.getText();
-            String adresseClientMod = jTextAreaAdresse.getText();
+            //String adresseClientMod = jTextAreaAdresse.getText();
             String mailClientMod = jTextFieldMailClient.getText();
             String numeroClientMod = jTextFieldNumClient.getText();
             
-            String requete = "UPDATE `t_clients` SET `nom`='"+nomClientMod+"',`prenom`='"+prenomClientMod+"',`adresse`='"+adresseClientMod+"',`numero`='"+numeroClientMod+"',`mail`='"+mailClientMod+"' WHERE `Id_Client`="+this.ID_Select_Client; // Récupération des données
+
+            // IL FAUT CHANGER L'ADRESSE AUSSI
+            
+            String requete = "UPDATE `t_clients` SET `nom`='"+nomClientMod+"',`prenom`='"+prenomClientMod+"',`numero`='"+numeroClientMod+"',`mail`='"+mailClientMod+"' WHERE `Id_Client`="+this.ID_Select_Client; // Récupération des données
             Statement myStatement = this.connection.createStatement();
             myStatement.executeUpdate(requete);
             
@@ -1186,7 +1457,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
 
     private void jButtonSupprimerClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerClientActionPerformed
         try {
-            // TODO add your handling code here:String requete = "UPDATE `t_clients` SET `nom`='"+nomClientMod+"',`prenom`='"+prenomClientMod+"',`adresse`='"+adresseClientMod+"',`numero`='"+numeroClientMod+"',`mail`='"+mailClientMod+"' WHERE `Id_Client`="+this.ID_Select_Client; // Récupération des données
+            // TODO add your handling code here:
             Statement myStatement = this.connection.createStatement();
             String requete = "DELETE FROM `t_clients` WHERE `Id_Client`="+this.ID_Select_Client; // Récupération des données
 
@@ -1211,35 +1482,25 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     
     public void RecuperationAlertes(){
         try {
-            Statement statementCommande = connection.createStatement();
             Statement statementArticles = connection.createStatement();
             Statement statementUpdate = connection.createStatement();
             int idArticle = 0;
-            int occuranceMin = 0;
-            int idCommande = 0;
+            int seuilArticle = 0;
             int stockArticle;
             String requeteSelectArticles = "SELECT * FROM `t_article`";
-            String requeteArticlesCommande;
             String requeteUpdate;
             ResultSet mesArticles = statementArticles.executeQuery(requeteSelectArticles);
-            ResultSet articlesCommande;
             while (mesArticles.next()){
                 idArticle = mesArticles.getInt(1);
-                requeteArticlesCommande = "SELECT * FROM `t_articles_commandes`, `t_commandes` WHERE `t_articles_commandes`.`id_commande` = `t_commandes`.`id_commande` AND `t_commandes`.`validation`=0 AND `t_articles_commandes`.`id_article`="+idArticle+" ORDER BY `t_articles_commandes`.`nb_articles` ASC;";
-                articlesCommande = statementCommande.executeQuery(requeteArticlesCommande);
-                if (articlesCommande.next()){
-                    occuranceMin = articlesCommande.getInt(3);
-                    idCommande = articlesCommande.getInt(5);
-                    stockArticle = mesArticles.getInt(7);
-                    // System.out.println("ID = "+idArticle+" | Plus grande occurance = "+occuranceMin+" | Commande = "+idCommande+" | Stock : "+stockArticle);
-                    if (occuranceMin > stockArticle ){
-                        //System.out.println("Pas assez d'articles "+idArticle+" : min = "+occuranceMin+ " | stock = "+stockArticle);
-                        requeteUpdate = "UPDATE `t_article` SET `alerte`=1 WHERE `Id_Article`="+idArticle;
-                    } else {
-                        requeteUpdate = "UPDATE `t_article` SET `alerte`=0 WHERE `Id_Article`="+idArticle;
-                    }
-                    statementUpdate.executeUpdate(requeteUpdate);
+                stockArticle = mesArticles.getInt(7);
+                seuilArticle = mesArticles.getInt(9);
+                if (seuilArticle > stockArticle ){
+                    requeteUpdate = "UPDATE `t_article` SET `alerte`=1 WHERE `Id_Article`="+idArticle;
+                } else {
+                    requeteUpdate = "UPDATE `t_article` SET `alerte`=0 WHERE `Id_Article`="+idArticle;
                 }
+                statementUpdate.executeUpdate(requeteUpdate);
+
             }
             
             System.out.println("FIN DES ALERTES !");
@@ -1296,8 +1557,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             String stockArticleMod = jTextFieldStockArticle.getText();
             String prixArticleMod = jTextFieldPrixArticle.getText();
             String referenceArticleMod = jTextFieldRefArticle.getText();
-            
-            String requete = "UPDATE `t_article` SET `libelle`=\""+libelleArticleMod+"\", `reference`='"+referenceArticleMod+"',`prix`='"+prixArticleMod+"',`stock`='"+stockArticleMod+"' WHERE `Id_Article`='"+this.ID_Select_Article+"'"; // Récupération des données
+            String seuil = jTextFieldSeuilArticle.getText();
+            String requete = "UPDATE `t_article` SET `libelle`=\""+libelleArticleMod+"\", `reference`='"+referenceArticleMod+"',`prix`='"+prixArticleMod+"',`stock`='"+stockArticleMod+"', `seuil`='"+seuil+"' WHERE `Id_Article`='"+this.ID_Select_Article+"'"; // Récupération des données
             Statement myStatement = this.connection.createStatement();
             myStatement.executeUpdate(requete);
             
@@ -1311,9 +1572,27 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private void jButtonSupprimerArticleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSupprimerArticleActionPerformed
         try {
             // TODO add your handling code here:
-            String requete = "DELETE FROM `t_article` WHERE `Id_Article`='"+this.ID_Select_Article+"'"; // Récupération des données
+            // Il faut absolument que je fasse en sorte que les articles présents dans des commandes ne puissent pas être supprimés
             Statement myStatement = this.connection.createStatement();
-            myStatement.executeUpdate(requete);
+            String requete = "SELECT DISTINCT `id_article` FROM `t_articles_commandes` ORDER BY `id_article` ASC";
+            ResultSet mesIDArticles = myStatement.executeQuery(requete);
+            boolean okSupp = true;
+                    
+            while (mesIDArticles.next()){
+                System.out.println(mesIDArticles.getInt(1));
+                if (this.ID_Select_Article == mesIDArticles.getInt(1)){
+                    System.out.println("Ah cet article est toujours present dans certaines commandes ! (historique inclus)");
+                    okSupp = false;
+                }
+                       
+            }
+            
+            
+            
+            if (okSupp){
+                requete = "DELETE FROM `t_article` WHERE `Id_Article`='"+this.ID_Select_Article+"'"; // Récupération des données
+                myStatement.executeUpdate(requete);
+            }
             this.viderTextFieldsArticles();
             
         } catch (SQLException ex) {
@@ -1481,34 +1760,206 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             String prix = this.jTextFieldPrixCreationArticle.getText();
             String type = this.jComboBoxTypeCreationArticle.getSelectedItem().toString();
             String stock = this.jTextFieldStockCreationArticle.getText();
-            
+            /*
             System.out.println("Le libelle de l'article est "+libelle);
             System.out.println("Le genre de l'article est "+genre);
             System.out.println("La ref de l'article est "+ref);
             System.out.println("Le prix de l'article est de "+prix);
             System.out.println("Le type de l'article est "+type);
             System.out.println("Il reste "+stock+" articles en stock");
-            
+            */
             requete = "SELECT * FROM `t_genre` WHERE libelle_Genre = '"+genre+"'";
             res = stmt.executeQuery(requete);
             res.next();
             genre = res.getString(1);
-            System.out.println("On recupere l'id du genre : "+genre);
+            // System.out.println("On recupere l'id du genre : "+genre);
             
             requete = "SELECT * FROM `t_types_vetements` WHERE libelle_type = '"+type+"'";
             res = stmt.executeQuery(requete);
             res.next();
             type = res.getString(1);
-            System.out.println("On recupere l'id du type : "+type);
+            //System.out.println("On recupere l'id du type : "+type);
             
             // On rajoute l'article !
             requete = "INSERT INTO `t_article`(`libelle`, `genre`, `reference`, `prix`, `type`, `stock`, `alerte`, `seuil`) VALUES ('"+libelle+"','"+genre+"','"+ref+"','"+prix+"','"+type+"','"+stock+"','0','16')";
             stmt.executeUpdate(requete);
             
+            
+            this.jDialogCreationArticle.setVisible(false);
+            this.viderTextFieldsArticles();
+            this.RemplirListeArticles();
+            
         } catch (SQLException ex) {
             Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonCreerCreationArticleActionPerformed
+
+    private void supprimerCommandeHist(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supprimerCommandeHist
+        try {
+            /*
+            D'abord on vérifie que l'ID de commande historique sélectionné est bien
+            présent dans la BDD
+            Ca marche
+            */
+            boolean okSupp = false;
+            String requete = "SELECT `id_commande` FROM `t_commandes` WHERE `validation`=1";
+            Statement stmt = this.connection.createStatement();
+            ResultSet mesIdCommandes = stmt.executeQuery(requete);
+            while (mesIdCommandes.next()){
+                System.out.print(mesIdCommandes.getInt(1)+" ");
+                if (this.ID_Select_Commande_Historique == mesIdCommandes.getInt(1)){
+                    okSupp = true;
+                }
+            }
+            if (okSupp){
+                requete = "DELETE FROM `t_commandes` WHERE `id_commande`="+this.ID_Select_Commande_Historique;
+                stmt.executeUpdate(requete);
+                requete = "DELETE FROM `t_articles_commandes` WHERE `id_commande` = "+this.ID_Select_Commande_Historique;
+                stmt.executeUpdate(requete);
+                this.ID_Select_Commande_Historique = 0;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_supprimerCommandeHist
+
+    private void jMenuInterfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuInterfaceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuInterfaceActionPerformed
+
+    private void jMenuItemInterfaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInterfaceActionPerformed
+        // TODO add your handling code here:
+        jPanelModifProfil.setVisible(false);
+        jTabbedPaneFenetre.setVisible(true);
+    }//GEN-LAST:event_jMenuItemInterfaceActionPerformed
+
+    private void jMenuItemProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProfilActionPerformed
+        // TODO add your handling code here:
+        jPanelModifProfil.setVisible(true);
+        jTabbedPaneFenetre.setVisible(false);
+    }//GEN-LAST:event_jMenuItemProfilActionPerformed
+
+    private void jButtonShowAncienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowAncienActionPerformed
+        // TODO add your handling code here:
+        if (this.showOldPassword){
+            jPasswordFieldOldPassword.setEchoChar('*');
+            this.showOldPassword = false;
+            this.jButtonShowAncien.setText("Afficher");
+        } else {           
+            jPasswordFieldOldPassword.setEchoChar((char)0);
+            this.showOldPassword = true;
+            this.jButtonShowAncien.setText("Cacher");
+        }
+    }//GEN-LAST:event_jButtonShowAncienActionPerformed
+
+    private void jButtonShowNouveauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowNouveauActionPerformed
+        // TODO add your handling code here:
+        if (this.showNewPassword){
+            jPasswordFieldNewPassword.setEchoChar('*');
+            this.showNewPassword = false;
+            this.jButtonShowNouveau.setText("Afficher");
+        } else {           
+            jPasswordFieldNewPassword.setEchoChar((char)0);
+            this.showNewPassword = true;
+            this.jButtonShowNouveau.setText("Cacher");
+        }
+    }//GEN-LAST:event_jButtonShowNouveauActionPerformed
+
+    private void jButtonShowConfirmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowConfirmerActionPerformed
+        // TODO add your handling code here:
+        if (this.showConfirmPassword){
+            jPasswordFieldConfirmPassword.setEchoChar('*');
+            this.showConfirmPassword = false;
+            this.jButtonShowConfirmer.setText("Afficher");
+        } else {           
+            jPasswordFieldConfirmPassword.setEchoChar((char)0);
+            this.showConfirmPassword = true;
+            this.jButtonShowConfirmer.setText("Cacher");
+        }
+    }//GEN-LAST:event_jButtonShowConfirmerActionPerformed
+
+    private void jTextFieldConnectNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldConnectNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldConnectNameActionPerformed
+
+    private void jButtonChangerMDPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonChangerMDPActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            /* Lorsqu'on valide on a 3 codes différents :
+            0 - Pas toutes les cases complètes
+            1 - Meme MDP qu'avant
+            2 - Mauvais MDP
+            3 - Changement MDP OK
+            */
+            
+            int codeMDP = 0;
+            
+            String oldMDP = new String(jPasswordFieldOldPassword.getPassword());
+            String newMDP = new String(jPasswordFieldNewPassword.getPassword());
+            String confirmMDP = new String(jPasswordFieldConfirmPassword.getPassword());
+            
+            /*
+            System.out.println(oldMDP);
+            System.out.println(newMDP);
+            System.out.println(confirmMDP);
+            */
+            
+            // Premier cas : Pas toutes les cases sont complètes :
+            if ("".equals(oldMDP) || "".equals(newMDP) || "".equals(confirmMDP)){
+                codeMDP = 0;
+                System.out.println("Il manque une case");
+            } else {
+                
+                if (oldMDP.equals(newMDP) && oldMDP.equals(confirmMDP)){
+                    codeMDP = 1;
+                    System.out.println("C'est le meme mot de passe qu'avant");
+                }
+                
+                if (!newMDP.equals(confirmMDP)){
+                    codeMDP = 2;
+                    System.out.println("Le MDP a confirmer n'est pas le bon");
+                }
+                
+                if (!oldMDP.equals(newMDP) && newMDP.equals(confirmMDP)){
+                    codeMDP = 3;
+                    System.out.println("On peut changer de MDP !");
+                }
+                
+            }
+            
+            switch (codeMDP) {
+                case 0:
+                    this.jLabelChangementDeMDP.setText("Une ou plusieurs cases ne sont pas complétées");
+                    break;
+                case 1:
+                    this.jLabelChangementDeMDP.setText("Le nouveau mot de passe est le même que l'ancien");
+                    break;
+                case 2:
+                    this.jLabelChangementDeMDP.setText("Le nouveau mot de passe n'est pas le même que dans la confirmation");
+                    break;
+                case 3:
+                    this.jLabelChangementDeMDP.setText("Le mot de passe a été changé avec succès");
+                    this.jPasswordFieldOldPassword.setText("");
+                    this.jPasswordFieldNewPassword.setText("");
+                    this.jPasswordFieldConfirmPassword.setText("");
+                    
+                    String request = "UPDATE `t_responsable` SET `mot_de_passe`='"+newMDP+"' WHERE `id` = "+this.ID_Responsable;
+                    Statement stmt = this.connection.createStatement();
+                    stmt.executeUpdate(request);
+                    
+                    break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IHM_Responsable.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButtonChangerMDPActionPerformed
     
     public void RemplirFicheCommandeHistorique(int idCommande){
         try {
@@ -1560,15 +2011,27 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             infosClient.next();
             String nom = infosClient.getString(2);
             String prenom = infosClient.getString(3);
-            String adresse = infosClient.getString(4);
-            String mail = infosClient.getString(6);
-            String numero = infosClient.getString(5);
+            String mail = infosClient.getString(10);
+            String numero_tel = infosClient.getString(9);
+            
+            String nom_de_rue = infosClient.getString(4);
+            String numero_rue = infosClient.getString(5);
+            String code_postal = infosClient.getString(6);
+            String ville = infosClient.getString(7);
+            String complement_adresse = infosClient.getString(8);
             
             jTextFieldNomClient.setText(nom);
             jTextFieldPrenomClient.setText(prenom);
-            jTextAreaAdresse.setText(adresse);
             jTextFieldMailClient.setText(mail);
-            jTextFieldNumClient.setText(numero);
+            jTextFieldNumClient.setText(numero_tel);
+            
+            jTextFieldNomDeRueClient.setText(nom_de_rue);
+            jTextFieldNumeroRueClient.setText(numero_rue);
+            jTextFieldCodePostalClient.setText(code_postal);
+            jTextFieldVilleClient.setText(ville);
+            jTextAreaComplementAdresse.setText(complement_adresse);
+            
+            
             
             jButtonModifierClient.setEnabled(true);
             jButtonSupprimerClient.setEnabled(true);
@@ -1589,6 +2052,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             String genre = infosArticle.getString(3);
             String prix = infosArticle.getString(5);
             String reference = infosArticle.getString(4);
+            String seuil = infosArticle.getString(9);
             
             // Recuperation du genre de l'article :
             requete = "SELECT `libelle_Genre` FROM `t_genre` WHERE `Id_Genre`='"+genre+"'";
@@ -1603,6 +2067,7 @@ public final class IHM_Responsable extends javax.swing.JFrame {
             jLabelGenreArticle.setText(genreArticle.getString(1));
             jTextFieldPrixArticle.setText(prix);
             jTextFieldRefArticle.setText(reference);
+            jTextFieldSeuilArticle.setText(seuil);
             
             jButtonModifierArticle.setEnabled(true);
             jButtonSupprimerArticle.setEnabled(true);
@@ -1841,6 +2306,8 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonChangerMDP;
     private javax.swing.JButton jButtonConnexion;
     private javax.swing.JButton jButtonCreationArticle;
     private javax.swing.JButton jButtonCreerCreationArticle;
@@ -1854,6 +2321,9 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JButton jButtonRefusCreationArticle;
     private javax.swing.JButton jButtonRefuserCommande;
     private javax.swing.JButton jButtonRefuserRefusCommande;
+    private javax.swing.JButton jButtonShowAncien;
+    private javax.swing.JButton jButtonShowConfirmer;
+    private javax.swing.JButton jButtonShowNouveau;
     private javax.swing.JButton jButtonSupprimerArticle;
     private javax.swing.JButton jButtonSupprimerClient;
     private javax.swing.JButton jButtonValiderCommande;
@@ -1891,17 +2361,31 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBonjourResponsable;
+    private javax.swing.JLabel jLabelChangementDeMDP;
     private javax.swing.JLabel jLabelClientHistorique;
     private javax.swing.JLabel jLabelConnectionEchouee;
     private javax.swing.JLabel jLabelGenreArticle;
     private javax.swing.JLabel jLabelHistoriquePrixTotal;
     private javax.swing.JLabel jLabelPrixCommande;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenuInterface;
+    private javax.swing.JMenuItem jMenuItemInterface;
+    private javax.swing.JMenuItem jMenuItemProfil;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAlertes;
     private javax.swing.JPanel jPanelArticles;
     private javax.swing.JPanel jPanelClients;
@@ -1911,7 +2395,11 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelModifClient;
     private javax.swing.JPanel jPanelModifClient1;
     private javax.swing.JPanel jPanelModifClient2;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanelModifProfil;
+    private javax.swing.JPasswordField jPasswordFieldConfirmPassword;
+    private javax.swing.JPasswordField jPasswordFieldNewPassword;
+    private javax.swing.JPasswordField jPasswordFieldOldPassword;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -1926,8 +2414,9 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JTable jTableCommandes;
     private javax.swing.JTable jTableCommandesHist;
     private javax.swing.JTable jTableContenuCommande;
-    private javax.swing.JTextArea jTextAreaAdresse;
+    private javax.swing.JTextArea jTextAreaComplementAdresse;
     private javax.swing.JTextArea jTextAreaHistoriqueArticles;
+    private javax.swing.JTextField jTextFieldCodePostalClient;
     private javax.swing.JTextField jTextFieldConnectName;
     private javax.swing.JTextField jTextFieldDateCommande;
     private javax.swing.JTextField jTextFieldIdClient;
@@ -1936,7 +2425,9 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldMailClient;
     private javax.swing.JTextField jTextFieldNomClient;
     private javax.swing.JTextField jTextFieldNomCreationClient;
+    private javax.swing.JTextField jTextFieldNomDeRueClient;
     private javax.swing.JTextField jTextFieldNumClient;
+    private javax.swing.JTextField jTextFieldNumeroRueClient;
     private javax.swing.JPasswordField jTextFieldPWord;
     private javax.swing.JTextField jTextFieldPrenomClient;
     private javax.swing.JTextField jTextFieldPrenomCreationClient;
@@ -1948,5 +2439,6 @@ public final class IHM_Responsable extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSeuilCreationArticle;
     private javax.swing.JTextField jTextFieldStockArticle;
     private javax.swing.JTextField jTextFieldStockCreationArticle;
+    private javax.swing.JTextField jTextFieldVilleClient;
     // End of variables declaration//GEN-END:variables
 }
